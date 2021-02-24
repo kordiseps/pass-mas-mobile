@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ActivityIndicator, View, Alert, Text, Button } from "react-native";
 import styled from "styled-components/native";
 import { getUserMail, getUserPinCode } from "../../dbContext/user";
 import Label from "../styledComponents/Label";
 import TextBox from "../styledComponents/TextBox";
+import ColorButton from "../styledComponents/ColorButton";
+import { getMainColor } from "../../dbContext/color";
+import BorderedDiv from "../styledComponents/BorderedDiv";
+import { ColorContext } from "../../contexts/ColorContext";
 
 const Div = styled.View`
   flex: 1;
@@ -13,9 +17,12 @@ export default Login = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [pinCode, setPinCode] = useState("");
   const [userName, setUserName] = useState("");
+
+  const { colors } = useContext(ColorContext);
+
   useEffect(() => {
     async function prepareData() {
-      let userMail = await getUserMail();
+      var userMail = await getUserMail();
       setUserName(userMail);
       setLoading(false);
     }
@@ -37,55 +44,13 @@ export default Login = (props) => {
       ) : (
         <View>
           <Label>{userName}</Label>
-          <TextBox isSecure isNumberOnly setText={setPinCode} />
-          <Button title="Giriş Yap " onPress={handleLogin} />
+          <TextBox isSecure isNumberOnly text={pinCode} setText={setPinCode} />
+          <ColorButton onPress={handleLogin}>Giriş Yap</ColorButton>
         </View>
       )}
     </Div>
   );
 };
-
-async function submitRegisterForm(email, pinCode) {
-  try {
-    return await makeRequest(
-      "https://pass-mas-api.herokuapp.com/users/register",
-      "POST",
-      {
-        userMail: email,
-        pinCode: pinCode,
-      }
-    );
-  } catch (err) {
-    console.log(err);
-    return {
-      errors: err,
-    };
-  }
-}
-
-async function makeRequest(uri, method, data) {
-  return fetch(uri, {
-    method,
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "User-Agent": "Mobile App",
-    },
-    body: JSON.stringify(data),
-  }).then((response) => {
-    if (!response.ok) {
-      return response
-        .json()
-        .catch(() => {
-          throw new Error(response.text());
-        })
-        .then((resposeData) => {
-          return resposeData;
-        });
-    }
-    return response.json();
-  });
-}
 
 const AsyncAlert = (title, message) => {
   return new Promise((resolve, reject) => {

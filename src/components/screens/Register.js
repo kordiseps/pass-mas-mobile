@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { ActivityIndicator, View, Alert, Button } from "react-native";
+import { ActivityIndicator, Alert } from "react-native";
 import TextBox from "../styledComponents/TextBox";
 import styled from "styled-components/native";
-import { getBackColor } from "../../dbContext/color";
 import { saveUser } from "../../dbContext/user";
 import { dbInitialize } from "../../dbContext/initialize";
 import { makeRequest } from "../../api/request";
@@ -32,7 +31,7 @@ export default Register = (props) => {
       } else {
         await AsyncAlert(
           "İşlem Yapılamadı",
-          `Sunucu Hatası : ${response.errors}`
+          `Sunucudan gelen hata : ${response.errors}`
         );
       }
     }
@@ -59,7 +58,7 @@ export default Register = (props) => {
       {isSubmitting ? (
         <ActivityIndicator color="red" />
       ) : (
-        <Button title="Kayıt Ol" onPress={handleSubmit} />
+        <ColorButton onPress={handleSubmit}>Kayıt Ol</ColorButton>
       )}
     </Div>
   );

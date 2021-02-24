@@ -4,6 +4,7 @@ import {
   PaswordsTableInitialize,
   SettingsTableInitialize,
   ColorsTableInitialize,
+  SuggestedLightModeColors,
 } from "../constants/sqlScripts";
 
 export function getTables() {
@@ -22,7 +23,9 @@ export function dbInitialize() {
     return execute(PaswordsTableInitialize).then(() => {
       execute(SettingsTableInitialize).then(() => {
         execute(ColorsTableInitialize).then(() => {
-          console.log("DbInitialize OK");         
+          execute(SuggestedLightModeColors).then(() => {
+            console.log("DbInitialize OK");
+          });
         });
       });
     });

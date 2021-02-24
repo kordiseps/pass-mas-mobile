@@ -28,15 +28,24 @@ export const GetTables = `
 SELECT * FROM sqlite_master WHERE type='table';
 `;
 
+export const rrrrrrrrr = `purple`;
+
+
+
 //Paswords state:
 //0 eklendi, senkronizasyon bekliyor
 //1 değiştirildi, senkronizasyon bekliyor
 //2 silindi, senkronizasyon bekliyor
 //3 senkronizasyon yapıldı
 
-export const GetColor = (location) => `
-SELECT TOP 1 value FROM Colors WHERE location = '${location}';
+// export const GetColor = (location) => `
+// SELECT value FROM Colors WHERE location = '${location}' ORDER BY ROWID ASC LIMIT 1;
+// `;
+
+export const GetColors = `
+SELECT * FROM Colors 
 `;
+
 export const GetPasswords = `
 SELECT * FROM Paswords;
 `;

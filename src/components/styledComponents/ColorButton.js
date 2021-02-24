@@ -1,24 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
+import { ColorContext } from "../../contexts/ColorContext";
+import BorderedDiv from "./BorderedDiv";
 
-const Div = styled.View`
-  width: 90%;
-  padding: 5px;
-  border: 2px solid red;
-  margin: 2% 5% 2% 5%;
-  border-radius: 10px;
-`;
 const Span = styled.Text`
   color: #000;
   text-align: center;
   font-size: 16px;
-  font-weight:bold;
+  font-weight: bold;
+  
 `;
-export default ColorButton = (props) => (
-  <TouchableOpacity onPress={props.onPress}>
-    <Div style={{borderColor:props.color}}>
-      <Span style={{color:props.color}}>{props.children}</Span>
-    </Div>
-  </TouchableOpacity>
-);
+export default ColorButton = (props) => {
+  const { colors } = useContext(ColorContext);
+  const textColor = props.color === undefined ? colors.mainColor : props.color;
+  return (
+    <TouchableOpacity onPress={props.onPress}>
+      <BorderedDiv>
+        <Span style={{ color: textColor }}>{props.children}</Span>
+      </BorderedDiv>
+    </TouchableOpacity>
+  );
+};

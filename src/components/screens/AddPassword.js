@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ActivityIndicator, View, Modal, Text, Button } from "react-native";
 import styled from "styled-components/native";
 import TextBox from "../styledComponents/TextBox";
 import Label from "../styledComponents/Label";
 import ColorPicker from "./ColorPicker";
 import ColorButton from "../styledComponents/ColorButton";
+import { ColorContext } from "../../contexts/ColorContext";
 
 const Div = styled.View`
   flex: 1;
@@ -17,6 +18,8 @@ export default AddPassword = (props) => {
   const [password, setPassword] = useState("");
   const [color, setColor] = useState("#000000");
   const [colorPickRequested, setColorPickRequested] = useState(false);
+  const { colors } = useContext(ColorContext);
+  useEffect(() => {}, []);
 
   function reset() {
     setApp("");
@@ -26,10 +29,14 @@ export default AddPassword = (props) => {
   }
 
   const handleSubmit = () => {
-    setIsSubmitting(true);
-    reset();
-    props.onAdd(app, username, password, color);
-    setIsSubmitting(false);
+    if (app !== "" && username !== "" && password !== "" && color !== "") {
+      setIsSubmitting(true);
+      reset();
+      props.onAdd(app, username, password, color);
+      setIsSubmitting(false);
+    } else {
+      alert("Tüm alanları doldurun");
+    }
   };
 
   const handleCancel = () => {
@@ -75,8 +82,12 @@ export default AddPassword = (props) => {
           <ActivityIndicator color="red" />
         ) : (
           <View>
-            <Button title="Vazgeç" onPress={handleCancel} />
-            <Button title="Kaydet" onPress={handleSubmit} />
+            <ColorButton color={colors.mainColor} onPress={handleCancel}>
+              Vazgeç
+            </ColorButton>
+            <ColorButton color={colors.mainColor} onPress={handleSubmit}>
+              Kaydet
+            </ColorButton>
           </View>
         )}
       </Div>

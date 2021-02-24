@@ -11,7 +11,8 @@ import styled from "styled-components/native";
 import TextBox from "../styledComponents/TextBox";
 import Label from "../styledComponents/Label";
 import colorsData from "../../dbContext/colors-tr.json";
-import { SearchBar } from "react-native-elements";
+import { SearchBar } from "react-native-elements"; 
+import BorderedDiv from "../styledComponents/BorderedDiv";
 
 const Div = styled.View`
   flex: 1;
@@ -37,7 +38,7 @@ export default ColorPicker = (props) => {
   const ITEM_HEIGHT = 50;
 
   const renderSeparator = () => {
-    return (
+    return (       
       <View
         style={{
           height: 1,
@@ -52,7 +53,9 @@ export default ColorPicker = (props) => {
   return (
     <Modal visible={props.visible} animationType="slide">
       <Div>
-        <TextBox placeholder="Renk Ara" setText={handleSearch} />
+        <BorderedDiv>
+          <TextBox placeholder="Renk Ara" setText={handleSearch} />
+        </BorderedDiv>
         <FlatList
           data={colors}
           renderItem={({ item }) => (
