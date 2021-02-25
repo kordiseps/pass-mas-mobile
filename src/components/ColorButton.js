@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
-import { ColorContext } from "../../contexts/ColorContext";
+import { ColorContext } from "../contexts/ColorContext";
 import BorderedDiv from "./BorderedDiv";
 
 const Span = styled.Text`

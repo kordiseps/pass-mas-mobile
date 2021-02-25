@@ -1,4 +1,4 @@
-import { RegisterUser, GetUser, GetTables } from "../constants/sqlScripts";
+import { GetTables } from "../constants/sqlScripts";
 import { execute } from "../tools/SqliteManager";
 import {
   PaswordsTableInitialize,

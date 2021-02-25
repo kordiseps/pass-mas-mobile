@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { ActivityIndicator, Alert } from "react-native";
-import TextBox from "../styledComponents/TextBox";
+import TextBox from "../components/TextBox";
 import styled from "styled-components/native";
-import { saveUser } from "../../dbContext/user";
-import { dbInitialize } from "../../dbContext/initialize";
-import { makeRequest } from "../../api/request";
+import { saveUser } from "../dbContext/user";
+import { dbInitialize } from "../dbContext/initialize";
+import { makeRequest } from "../api/request";
 
 const Div = styled.View`
   flex: 1;

@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, View, Modal, Text, Button } from "react-native";
+import { ActivityIndicator, View, Modal } from "react-native";
 import styled from "styled-components/native";
-import TextBox from "../styledComponents/TextBox";
-import Label from "../styledComponents/Label";
+import TextBox from "../components/TextBox";
+import Label from "../components/Label";
 import ColorPicker from "./ColorPicker";
-import ColorButton from "../styledComponents/ColorButton";
-import { ColorContext } from "../../contexts/ColorContext";
+import ColorButton from "../components/ColorButton";
+import { ColorContext } from "../contexts/ColorContext";
 
 const Div = styled.View`
   flex: 1;

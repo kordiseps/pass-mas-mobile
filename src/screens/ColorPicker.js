@@ -8,11 +8,9 @@ import {
   ActivityIndicator,
 } from "react-native";
 import styled from "styled-components/native";
-import TextBox from "../styledComponents/TextBox";
-import Label from "../styledComponents/Label";
-import colorsData from "../../dbContext/colors-tr.json";
-import { SearchBar } from "react-native-elements"; 
-import BorderedDiv from "../styledComponents/BorderedDiv";
+import TextBox from "../components/TextBox"; 
+import colorsData from "../dbContext/colors-tr.json"; 
+import BorderedDiv from "../components/BorderedDiv";
 
 const Div = styled.View`
   flex: 1;

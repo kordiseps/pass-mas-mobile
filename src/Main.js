@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, SafeAreaView } from "react-native";
 import Header from "./components/Header";
-import Register from "./components/screens/Register";
+import Register from "./screens/Register";
 import * as FileSystem from "expo-file-system";
-import PasswordList from "./components/screens/PasswordList";
-import Login from "./components/screens/Login";
+import PasswordList from "./screens/PasswordList";
+import Login from "./screens/Login";
 import { ColorContext } from "./contexts/ColorContext";
 import { GetColorsForContext } from "./dbContext/color";
 
