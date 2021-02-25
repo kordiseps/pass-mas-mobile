@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import styled from "styled-components/native";
 import TextBox from "../components/TextBox"; 
-import colorsData from "../dbContext/colors-tr.json"; 
+import colorsData from "../constants/colorList.json"; 
 import BorderedDiv from "../components/BorderedDiv";
 
 const Div = styled.View`

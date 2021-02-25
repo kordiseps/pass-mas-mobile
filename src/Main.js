@@ -7,6 +7,7 @@ import PasswordList from "./screens/PasswordList";
 import Login from "./screens/Login";
 import { ColorContext } from "./contexts/ColorContext";
 import { GetColorsForContext } from "./dbContext/color";
+import { isFirst } from "./helpers/sqliteconnector";
 
 export default function Main() {
   const [loading, setLoading] = useState(true);
@@ -20,8 +21,8 @@ export default function Main() {
   });
   useEffect(() => {
     async function prp() {
-      const dbExist = await DoesDbExist();
-      if (dbExist) {
+      const isFirstUsage = await isFirst()
+      if (!isFirstUsage) {
         const colorsFromDb = await GetColorsForContext();
         //console.log("ColorTest in Mainjs", colorsFromDb);
         setColors(colorsFromDb)
@@ -55,23 +56,4 @@ export default function Main() {
       </ColorContext.Provider>
     </SafeAreaView>
   );
-}
-
-async function DoesDbExist() {
-  const rootDir = await FileSystem.readDirectoryAsync(
-    FileSystem.documentDirectory
-  );
-
-  if (rootDir.length > 0) {
-    if (rootDir.some((item) => item === "SQLite")) {
-      const sqliteDir = await FileSystem.readDirectoryAsync(
-        FileSystem.documentDirectory + "SQLite"
-      );
-      if (sqliteDir.some((item) => item === "app.db")) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
 }

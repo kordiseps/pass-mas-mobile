@@ -1,5 +1,5 @@
 import { GetTables } from "../constants/sqlScripts";
-import { execute } from "../tools/SqliteManager";
+import { execute } from "../helpers/sqliteconnector";
 import {
   PaswordsTableInitialize,
   SettingsTableInitialize,

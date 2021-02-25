@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, View, Alert, Text, Button } from "react-native";
+import { ActivityIndicator, View, Alert } from "react-native";
 import styled from "styled-components/native";
-import { getUserMail, getUserPinCode } from "../dbContext/user";
 import Label from "../components/Label";
 import TextBox from "../components/TextBox";
 import ColorButton from "../components/ColorButton";
 import { ColorContext } from "../contexts/ColorContext";
+import { getSetting } from "../dbContext/setting";
+import { GetUserMail, GetUserPinCode } from "../constants/sqlScripts";
 
 const Div = styled.View`
   flex: 1;
@@ -63,3 +64,11 @@ const AsyncAlert = (title, message) => {
     );
   });
 };
+
+function getUserMail() {
+  return getSetting(GetUserMail);
+}
+
+function getUserPinCode() {
+  return getSetting(GetUserPinCode);
+}

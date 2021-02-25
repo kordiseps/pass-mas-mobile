@@ -1,4 +1,5 @@
 import * as SQLite from "expo-sqlite";
+import { GetPasswords } from "../constants/sqlScripts";
 
 export function execute(sqlString) {
   db = SQLite.openDatabase("app.db");
@@ -11,5 +12,17 @@ export function execute(sqlString) {
         (_, err) => reject(err)
       );
     });
+  });
+}
+
+export function isFirst() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      var result = await execute(GetPasswords);      
+      resolve(false);
+    } catch {
+      console.log("isFirst true")
+      resolve(true);
+    }
   });
 }

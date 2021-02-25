@@ -1,5 +1,5 @@
 import { GetColors } from "../constants/sqlScripts";
-import { execute } from "../tools/SqliteManager";
+import { execute } from "../helpers/sqliteconnector";
 
 export function GetColorsForContext() {
   console.log("GetColorContext");

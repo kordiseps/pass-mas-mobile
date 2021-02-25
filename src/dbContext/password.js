@@ -3,7 +3,7 @@ import {
   InsertApiIdPassword,
   InsertPassword,
 } from "../constants/sqlScripts";
-import { execute } from "../tools/SqliteManager";
+import { execute } from "../helpers/sqliteconnector";
 
 export function savePassword(app, username, password, color) {
   let sqlString = InsertPassword(app, username, password, color);

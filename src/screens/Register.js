@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { ActivityIndicator, Alert } from "react-native";
 import TextBox from "../components/TextBox";
 import styled from "styled-components/native";
-import { saveUser } from "../dbContext/user";
-import { dbInitialize } from "../dbContext/initialize";
 import { makeRequest } from "../api/request";
+import { initialize } from "../helpers/initializer";
+import { DeleteUsers, InsertUser } from "../constants/sqlScripts";
+import { execute } from "../helpers/sqliteconnector";
 
 const Div = styled.View`
   flex: 1;
@@ -22,20 +23,24 @@ export default Register = (props) => {
       await AsyncAlert("Hatalı İşlem", "Pin kodları eşleşmiyor");
     } else {
       let response = await submitRegisterForm(email, pinCode);
-
       if (response.isSuccess) {
         await AsyncAlert("İşlem Başarılı", "Kayıt işlemi başarılı");
-        dbInitialize()
-          .then(() => saveUser(email, pinCode))
-          .then(() => props.registered());
+        try {
+          await initialize();
+          await saveUser(email, pinCode);
+          props.registered();
+        } catch (error) {
+          await AsyncAlert("İşlem Yapılamadı", `Oluşan hata : ${error}`);
+          setIsSubmitting(false);
+        }
       } else {
         await AsyncAlert(
           "İşlem Yapılamadı",
           `Sunucudan gelen hata : ${response.errors}`
         );
+        setIsSubmitting(false);
       }
-    }
-    setIsSubmitting(false);
+    } 
   };
   return (
     <Div>
@@ -95,3 +100,19 @@ const AsyncAlert = (title, message) => {
     );
   });
 };
+
+export function saveUser(userMail, pinCode) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      // await execute(DeleteUsers);
+      // console.log("DeleteUsers succ");
+      let sqlString = InsertUser(userMail, pinCode);
+      await execute(sqlString);    
+      console.log("saveUser OK");
+      resolve();
+    } catch (error) {
+      console.log("saveUser error", error);
+      reject(error);
+    }
+  });
+}

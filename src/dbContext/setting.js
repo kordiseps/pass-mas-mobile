@@ -1,4 +1,4 @@
-import { execute } from "../tools/SqliteManager";
+import { execute } from "../helpers/sqliteconnector";
 
 export async function getSetting(sqlQuery) {
   try {

@@ -1,7 +1,6 @@
 import { postData } from "../api/data";
 import { login } from "../api/user";
 import { getPasswords, insertApiIdPassword } from "../dbContext/password";
-import { getUserMail, getUserPinCode } from "../dbContext/user";
 
 export async function synchronize() {
   console.log("synchronize bg");
@@ -37,4 +36,14 @@ export async function synchronize() {
       console.log("güncel ", element);
     }
   }
+}
+
+
+
+function getUserMail() {
+  return getSetting(GetUserMail);
+}
+
+function getUserPinCode() {
+  return getSetting(GetUserPinCode);
 }
