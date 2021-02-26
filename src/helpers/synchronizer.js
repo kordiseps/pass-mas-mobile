@@ -1,6 +1,10 @@
-import { postData } from "../api/data";
-import { login } from "../api/user";
-import { getPasswords, insertApiIdPassword } from "../dbContext/password";
+import { postData, login } from "./apiconnector";
+import {
+  getPasswords,
+  getSetting,
+  insertApiIdPassword,
+} from "../contexts/dbContext";
+import { GetUserMail, GetUserPinCode } from "../constants/sqlScripts";
 
 export async function synchronize() {
   console.log("synchronize bg");
@@ -37,8 +41,6 @@ export async function synchronize() {
     }
   }
 }
-
-
 
 function getUserMail() {
   return getSetting(GetUserMail);

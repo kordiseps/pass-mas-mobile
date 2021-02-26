@@ -5,7 +5,7 @@ import Label from "../components/Label";
 import TextBox from "../components/TextBox";
 import ColorButton from "../components/ColorButton";
 import { ColorContext } from "../contexts/ColorContext";
-import { getSetting } from "../dbContext/setting";
+import { getSetting } from "../contexts/dbContext";
 import { GetUserMail, GetUserPinCode } from "../constants/sqlScripts";
 
 const Div = styled.View`

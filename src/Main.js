@@ -6,7 +6,7 @@ import * as FileSystem from "expo-file-system";
 import PasswordList from "./screens/PasswordList";
 import Login from "./screens/Login";
 import { ColorContext } from "./contexts/ColorContext";
-import { GetColorsForContext } from "./dbContext/color";
+import { GetColorsForContext } from "./contexts/dbContext";
 import { isFirst } from "./helpers/sqliteconnector";
 
 export default function Main() {

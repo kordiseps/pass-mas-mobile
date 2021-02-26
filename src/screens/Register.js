@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ActivityIndicator, Alert } from "react-native";
 import TextBox from "../components/TextBox";
 import styled from "styled-components/native";
-import { makeRequest } from "../api/request";
+import { makeRequest } from "../helpers/apiconnector";
 import { initialize } from "../helpers/initializer";
 import { DeleteUsers, InsertUser } from "../constants/sqlScripts";
 import { execute } from "../helpers/sqliteconnector";

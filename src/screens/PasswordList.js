@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, View, FlatList } from "react-native";
 import styled from "styled-components/native";
-import { getPasswords, savePassword } from "../dbContext/password";
+import { getPasswords, savePassword } from "../contexts/dbContext";
 import { synchronize } from "../helpers/synchronizer";
 import ColorButton from "../components/ColorButton";
 import ListItem from "../components/ListItem";
