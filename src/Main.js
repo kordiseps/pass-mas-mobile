@@ -20,11 +20,10 @@ export default function Main() {
     cancelColor: "#333025",
   });
   useEffect(() => {
-    async function prp() {
+    async function prepare() {
       const isFirstUsage = await isFirst()
       if (!isFirstUsage) {
         const colorsFromDb = await GetColorsForContext();
-        //console.log("ColorTest in Mainjs", colorsFromDb);
         setColors(colorsFromDb)
         setFirst(false);
         setLoading(false);
@@ -33,13 +32,13 @@ export default function Main() {
         setLoading(false);
       }
     }
-    prp();
+    prepare();
   }, []);
 
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: 20 }}>
       <ColorContext.Provider value={{colors, setColors}}>
-        <Header />
+        <Header isLoggedIn={loggedIn} />
         {loading ? (
           <ActivityIndicator size="large" color="red" />
         ) : first ? (

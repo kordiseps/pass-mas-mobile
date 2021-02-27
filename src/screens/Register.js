@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { ActivityIndicator, Alert } from "react-native";
 import TextBox from "../components/TextBox";
 import styled from "styled-components/native";
-import { makeRequest } from "../helpers/apiconnector";
+import { submitRegisterForm } from "../helpers/apiconnector";
 import { initialize } from "../helpers/initializer";
-import { DeleteUsers, InsertUser } from "../constants/sqlScripts";
+import { InsertUser } from "../constants/sqlScripts";
 import { execute } from "../helpers/sqliteconnector";
 
 const Div = styled.View`
@@ -40,7 +40,7 @@ export default Register = (props) => {
         );
         setIsSubmitting(false);
       }
-    } 
+    }
   };
   return (
     <Div>
@@ -65,27 +65,10 @@ export default Register = (props) => {
       ) : (
         <ColorButton onPress={handleSubmit}>Kayıt Ol</ColorButton>
       )}
+      <ColorButton onPress={handleSubmit}>Zaten Kayıtlı mısınız?</ColorButton>
     </Div>
   );
 };
-
-async function submitRegisterForm(userMail, pinCode) {
-  try {
-    return await makeRequest(
-      "https://pass-mas-api.herokuapp.com/users/register",
-      "POST",
-      {
-        userMail: userMail,
-        pinCode: pinCode,
-      }
-    );
-  } catch (err) {
-    console.log(err);
-    return {
-      errors: err,
-    };
-  }
-}
 
 const AsyncAlert = (title, message) => {
   return new Promise((resolve, reject) => {
@@ -107,7 +90,7 @@ export function saveUser(userMail, pinCode) {
       // await execute(DeleteUsers);
       // console.log("DeleteUsers succ");
       let sqlString = InsertUser(userMail, pinCode);
-      await execute(sqlString);    
+      await execute(sqlString);
       console.log("saveUser OK");
       resolve();
     } catch (error) {
