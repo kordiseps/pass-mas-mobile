@@ -6,7 +6,7 @@ import * as FileSystem from "expo-file-system";
 import PasswordList from "./screens/PasswordList";
 import Login from "./screens/Login";
 import { ColorContext } from "./contexts/ColorContext";
-import { GetColorsForContext } from "./contexts/dbContext";
+import { GetColorsForContext, SetMainColors } from "./contexts/dbContext";
 import { isFirst } from "./helpers/sqliteconnector";
 import Loading from "./components/Loading";
 
@@ -24,6 +24,8 @@ export default function Main() {
     async function prepare() {
       const isFirstUsage = await isFirst()
       if (!isFirstUsage) {
+        //await SetMainColors()
+        
         const colorsFromDb = await GetColorsForContext();
         setColors(colorsFromDb)
         setFirst(false);
@@ -37,7 +39,7 @@ export default function Main() {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: 20 }}>
+    <SafeAreaView style={{ flex: 1, paddingTop: 20, backgroundColor:colors.backColor }}>
       <ColorContext.Provider value={{colors, setColors}}>
         <Header isLoggedIn={loggedIn} />
         {loading ? (

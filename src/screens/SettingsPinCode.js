@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Keyboard } from "react-native";
-import { View } from "react-native";
-import { Modal } from "react-native";
 import ColorButton from "../components/ColorButton";
 import Label from "../components/Label";
 import Loading from "../components/Loading";
 import TextBox from "../components/TextBox";
 import { UpdateLoginPinCode } from "../contexts/dbContext";
+import MyModal from "../components/MyModal";
 
 export const SettingsPassword = (props) => {
   const [oldPassword, setOldPassword] = useState("");
@@ -16,11 +15,21 @@ export const SettingsPassword = (props) => {
   useEffect(() => {}, []);
   const handleChangeUserPassword = async () => {
     Keyboard.dismiss();
-    if (newPassword !== newPasswordConfirm) {
-      alert("Pin Kodları eşleşmiyor");
+
+    if (
+      oldPassword.length === 0 ||
+      newPassword.length === 0 ||
+      newPasswordConfirm.length === 0
+    ) {
+      alert("Tüm alanları doldurmalısınız.");
       return;
     }
-    if (newPassword.length!==6) {
+
+    if (newPassword !== newPasswordConfirm) {
+      alert("Pin kodları eşleşmiyor");
+      return;
+    }
+    if (newPassword.length !== 6) {
       alert("Yeni pin kodu geçersiz, 6 karakter olmalı.");
       return;
     }
@@ -41,41 +50,41 @@ export const SettingsPassword = (props) => {
   };
 
   return (
-    <Modal visible={props.visible} animationType="slide">
-      <View style={{ flex: 1, marginTop: 50 }}>
-        <Label>Kullanıcı Pin Kodu Ayarları</Label>
-        <TextBox
-          placeholder="Eski Pin Kodu"
-          text={oldPassword}
-          setText={setOldPassword}
-          isSecure
-          isNumberOnly
-        />
-        <TextBox
-          placeholder="Yeni Pin Kodu"
-          text={newPassword}
-          setText={setNewPassword}
-          isSecure
-          isNumberOnly
-        />
-        <TextBox
-          placeholder="Yeni Pin Kodu Onayla"
-          text={newPasswordConfirm}
-          setText={setNewPasswordConfirm}
-          isSecure
-          isNumberOnly
-        />
-        {processing ? (
-          <Loading />
-        ) : (
-          <>
-            <ColorButton onPress={handleChangeUserPassword}>
-              Kullanıcı Pin Kodusını Değiştir
-            </ColorButton>
-            <ColorButton onPress={handleCloseSettings}>Geri</ColorButton>
-          </>
-        )}
-      </View>
-    </Modal>
+    <MyModal visible={props.visible}>
+      <Label>Kullanıcı Pin Kodu Ayarları</Label>
+      <TextBox
+        placeholder="Eski Pin Kodu"
+        text={oldPassword}
+        setText={setOldPassword}
+        isSecure
+        isNumberOnly
+      />
+      <TextBox
+        placeholder="Yeni Pin Kodu"
+        text={newPassword}
+        setText={setNewPassword}
+        isSecure
+        isNumberOnly
+      />
+      <TextBox
+        placeholder="Yeni Pin Kodu Onayla"
+        text={newPasswordConfirm}
+        setText={setNewPasswordConfirm}
+        isSecure
+        isNumberOnly
+      />
+      {processing ? (
+        <Loading />
+      ) : (
+        <>
+          <ColorButton onPress={handleChangeUserPassword}>
+            Kullanıcı Pin Kodusını Değiştir
+          </ColorButton>
+          <ColorButton cancel onPress={handleCloseSettings}>
+            Geri
+          </ColorButton>
+        </>
+      )}
+    </MyModal>
   );
 };

@@ -7,10 +7,11 @@ import {
   PaswordsTableInitialize,
   SettingsTableInitialize,
   ColorsTableInitialize,
-  SuggestedLightModeColors,
+  SuggestedColors,
   GetColors,
   GetUserPinCode,
   UpdateUserPinCode,
+  SetColor,
 } from "../constants/sqlScripts";
 
 export function GetColorsForContext() {
@@ -25,6 +26,38 @@ export function GetColorsForContext() {
       });
       //console.log("GetColorContext colorsObject", colorsObject);
       resolve(colorsObject);
+    } catch (error) {
+      console.log("GetColors error", error);
+      reject(error);
+    }
+  });
+}
+
+export function SetMainColors() {
+  console.log("1");
+  return new Promise(async (resolve, reject) => {
+    try {
+      var sqlString = SetColor("mainColor","red")
+      console.log(sqlString)
+      await execute(sqlString);
+      resolve();
+    } catch (error) {
+      console.log("GetColors error", error);
+      reject(error);
+    }
+  });
+}
+
+export function SetColors(val) {
+  console.log("SetColorContext");
+  return new Promise(async (resolve, reject) => {
+    try {
+      Object.getOwnPropertyNames(val).forEach(async (propertyName)=>{
+        var sqlString = SetColor(propertyName,val[propertyName])
+        console.log(sqlString)
+        await execute(sqlString);
+      })   
+      resolve();
     } catch (error) {
       console.log("GetColors error", error);
       reject(error);
@@ -48,7 +81,7 @@ export function dbInitialize() {
     return execute(PaswordsTableInitialize).then(() => {
       execute(SettingsTableInitialize).then(() => {
         execute(ColorsTableInitialize).then(() => {
-          execute(SuggestedLightModeColors).then(() => {
+          execute(SuggestedColors).then(() => {
             console.log("DbInitialize OK");
           });
         });
@@ -113,17 +146,16 @@ export async function getSetting(sqlQuery) {
   }
 }
 
-export async function UpdateLoginPinCode(oldPinCode,newPinCode) {
+export async function UpdateLoginPinCode(oldPinCode, newPinCode) {
   var oldPinCodeLocally = await getSetting(GetUserPinCode);
   if (oldPinCodeLocally !== oldPinCode) {
-    return "BAŞARISIZ, ESKİ PİN KODU YANLIŞ"
+    return "BAŞARISIZ, ESKİ PİN KODU YANLIŞ";
   }
   let sqlString = UpdateUserPinCode(newPinCode);
   try {
-    await execute(sqlString)
-    return "BAŞARILI"
+    await execute(sqlString);
+    return "BAŞARILI";
   } catch (error) {
-    return "BAŞARISIZ, " + error 
+    return "BAŞARISIZ, " + error;
   }
-
 }
