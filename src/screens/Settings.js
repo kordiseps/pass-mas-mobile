@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Modal } from "react-native";
 import ColorButton from "../components/ColorButton";
 import { SettingsColorTheme } from "./SettingsColorTheme";
-import { SettingsPassword } from "./SettingsPassword";
+import { SettingsPassword as SettingsPinCode } from "./SettingsPinCode";
 import { SettingsRemoveUserData } from "./SettingsRemoveUserData";
 import { SettingsSynchronize } from "./SettingsSynchronize";
 
@@ -33,7 +33,7 @@ export const Settings = (props) => {
     <Modal visible={props.visible} animationType="slide">
       <View style={{ flex: 1, marginTop: 50 }}>
         <ColorButton onPress={handleUserPasswordSettings}>
-          Kullanıcı Parolası Ayarları
+          Kullanıcı Pin Kodu Ayarları
         </ColorButton>
         <ColorButton onPress={handleColorThemeSettings}>
           Tema Ayarları
@@ -45,7 +45,7 @@ export const Settings = (props) => {
           Kullanıcı Veri Silme Ayarları
         </ColorButton>     
         <ColorButton onPress={handleCloseSettings}>Ayarları kapat</ColorButton>
-        <SettingsPassword
+        <SettingsPinCode
           visible={passwordSettings}
           onClose={() => {
             setPasswordSettings((o) => !o);

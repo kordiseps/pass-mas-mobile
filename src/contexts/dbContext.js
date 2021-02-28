@@ -9,6 +9,8 @@ import {
   ColorsTableInitialize,
   SuggestedLightModeColors,
   GetColors,
+  GetUserPinCode,
+  UpdateUserPinCode,
 } from "../constants/sqlScripts";
 
 export function GetColorsForContext() {
@@ -109,4 +111,19 @@ export async function getSetting(sqlQuery) {
       errors: err,
     };
   }
+}
+
+export async function UpdateLoginPinCode(oldPinCode,newPinCode) {
+  var oldPinCodeLocally = await getSetting(GetUserPinCode);
+  if (oldPinCodeLocally !== oldPinCode) {
+    return "BAŞARISIZ, ESKİ PİN KODU YANLIŞ"
+  }
+  let sqlString = UpdateUserPinCode(newPinCode);
+  try {
+    await execute(sqlString)
+    return "BAŞARILI"
+  } catch (error) {
+    return "BAŞARISIZ, " + error 
+  }
+
 }

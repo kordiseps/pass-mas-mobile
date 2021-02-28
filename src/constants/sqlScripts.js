@@ -76,6 +76,9 @@ SELECT * FROM Settings WHERE setting = 'userMail';
 export const GetUserPinCode = `
 SELECT * FROM Settings WHERE setting = 'pinCode';
 `;
+export const UpdateUserPinCode = (pinCode)=> `
+UPDATE Settings SET value = '${pinCode}' WHERE setting = 'pinCode';
+`;
 
 export const SuggestedLightModeColors = `
 INSERT INTO Colors ( location, locationDescription, value ) 

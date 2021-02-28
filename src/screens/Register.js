@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { ActivityIndicator, Alert } from "react-native";
+import { Alert } from "react-native";
 import TextBox from "../components/TextBox";
 import styled from "styled-components/native";
 import { submitRegisterForm } from "../helpers/apiconnector";
 import { initialize } from "../helpers/initializer";
 import { InsertUser } from "../constants/sqlScripts";
 import { execute } from "../helpers/sqliteconnector";
+import Loading from "../components/Loading";
 
 const Div = styled.View`
   flex: 1;
@@ -61,7 +62,7 @@ export default Register = (props) => {
       />
 
       {isSubmitting ? (
-        <ActivityIndicator color="red" />
+        <Loading />
       ) : (
         <ColorButton onPress={handleSubmit}>Kayıt Ol</ColorButton>
       )}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native";
 import Header from "./components/Header";
 import Register from "./screens/Register";
 import * as FileSystem from "expo-file-system";
@@ -8,6 +8,7 @@ import Login from "./screens/Login";
 import { ColorContext } from "./contexts/ColorContext";
 import { GetColorsForContext } from "./contexts/dbContext";
 import { isFirst } from "./helpers/sqliteconnector";
+import Loading from "./components/Loading";
 
 export default function Main() {
   const [loading, setLoading] = useState(true);
@@ -40,7 +41,7 @@ export default function Main() {
       <ColorContext.Provider value={{colors, setColors}}>
         <Header isLoggedIn={loggedIn} />
         {loading ? (
-          <ActivityIndicator size="large" color="red" />
+          <Loading size={150}/>
         ) : first ? (
           <Register registered={() => setFirst(false)} />
         ) : !loggedIn ? (

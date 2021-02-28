@@ -26,6 +26,7 @@ export async function synchronize() {
     if (element.state === 0) {
       console.log("eklenecek ", element);
       const res = await postData(element, key);
+      console.log("api post data sonucu",res)
       if (res.isSuccess === true) {
         insertApiIdPassword(element.id, res.message);
       } else {

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, View, Alert } from "react-native";
+import { View, Alert } from "react-native";
 import styled from "styled-components/native";
 import Label from "../components/Label";
 import TextBox from "../components/TextBox";
@@ -7,6 +7,7 @@ import ColorButton from "../components/ColorButton";
 import { ColorContext } from "../contexts/ColorContext";
 import { getSetting } from "../contexts/dbContext";
 import { GetUserMail, GetUserPinCode } from "../constants/sqlScripts";
+import Loading from "../components/Loading";
 
 const Div = styled.View`
   flex: 1;
@@ -39,7 +40,7 @@ export default Login = (props) => {
   return (
     <Div>
       {isLoading ? (
-        <ActivityIndicator color="red" />
+        <Loading size={150}/>
       ) : (
         <View>
           <Label>{userName}</Label>

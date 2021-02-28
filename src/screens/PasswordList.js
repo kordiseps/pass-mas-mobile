@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, View, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 import styled from "styled-components/native";
 import { getPasswords, savePassword } from "../contexts/dbContext";
 import { synchronize } from "../helpers/synchronizer";
 import ColorButton from "../components/ColorButton";
 import ListItem from "../components/ListItem";
 import AddPassword from "./AddPassword";
+import Loading from "../components/Loading";
 
 const Div = styled.View`
   flex: 1;
@@ -49,7 +50,7 @@ export default PasswordList = (props) => {
   return (
     <Div>
       {isLoading ? (
-        <ActivityIndicator color="red" />
+        <Loading size={150}/>
       ) : (
         <View style={{ flex: 1 }}>
           <FlatList
@@ -64,7 +65,7 @@ export default PasswordList = (props) => {
             onCancel={handleCancel}
           />
           {isSynchronizing ? (
-            <ActivityIndicator color="blue" />
+            <Loading passiveColor/>
           ) : (
             <>
               <ColorButton color="#0569ff" onPress={handleNew}>

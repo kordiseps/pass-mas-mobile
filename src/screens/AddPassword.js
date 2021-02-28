@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, View, Modal } from "react-native";
+import { View, Modal } from "react-native";
 import styled from "styled-components/native";
 import TextBox from "../components/TextBox";
 import Label from "../components/Label";
 import ColorPicker from "./ColorPicker";
 import ColorButton from "../components/ColorButton";
 import { ColorContext } from "../contexts/ColorContext";
+import Loading from "../components/Loading";
 
 const Div = styled.View`
   flex: 1;
@@ -79,7 +80,7 @@ export default AddPassword = (props) => {
         />
 
         {isSubmitting ? (
-          <ActivityIndicator color="red" />
+          <Loading />
         ) : (
           <View>
             <ColorButton color={colors.mainColor} onPress={handleCancel}>

@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Modal,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  ActivityIndicator,
-} from "react-native";
+import { View, Modal, Text, TouchableOpacity, FlatList } from "react-native";
 import styled from "styled-components/native";
-import TextBox from "../components/TextBox"; 
-import colorsData from "../constants/colorList.json"; 
+import TextBox from "../components/TextBox";
+import colorsData from "../constants/colorList.json";
 import BorderedDiv from "../components/BorderedDiv";
 
 const Div = styled.View`
@@ -36,13 +29,12 @@ export default ColorPicker = (props) => {
   const ITEM_HEIGHT = 50;
 
   const renderSeparator = () => {
-    return (       
+    return (
       <View
         style={{
           height: 1,
           width: "100%",
           backgroundColor: "#CED0CE",
-          //marginLeft: "14%",
         }}
       />
     );
