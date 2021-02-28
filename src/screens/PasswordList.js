@@ -15,7 +15,6 @@ const Div = styled.View`
 export default PasswordList = (props) => {
   const [addRequested, setAddRequested] = useState(false);
   const [isLoading, setLoading] = useState(true);
-  const [isSynchronizing, setSynchronizing] = useState(false);
   const [passwordList, setPasswordList] = useState([]);
 
   async function loadPasswords() {
@@ -29,12 +28,6 @@ export default PasswordList = (props) => {
     loadPasswords();
   }, []);
 
-  const handleSynchronize = async () => {
-    console.log("senkronizasyon isteği geldi");
-    setSynchronizing(true);
-    await synchronize();
-    setSynchronizing(false);
-  };
   const handleNew = () => {
     setAddRequested(true);
   };
@@ -50,7 +43,7 @@ export default PasswordList = (props) => {
   return (
     <Div>
       {isLoading ? (
-        <Loading size={150}/>
+        <Loading size={150} />
       ) : (
         <View style={{ flex: 1 }}>
           <FlatList
@@ -64,18 +57,7 @@ export default PasswordList = (props) => {
             onAdd={handleAdd}
             onCancel={handleCancel}
           />
-          {isSynchronizing ? (
-            <Loading passiveColor/>
-          ) : (
-            <>
-              <ColorButton color="#0569ff" onPress={handleNew}>
-                Yeni Ekle
-              </ColorButton>
-              <ColorButton color="#ff051a" onPress={handleSynchronize}>
-                Senkronize Et
-              </ColorButton>
-            </>
-          )}
+          <ColorButton onPress={handleNew}>Yeni Ekle</ColorButton>
         </View>
       )}
     </Div>

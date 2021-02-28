@@ -28,9 +28,6 @@ export const GetTables = `
 SELECT * FROM sqlite_master WHERE type='table';
 `;
 
-export const rrrrrrrrr = `purple`;
-
-
 
 //Paswords state:
 //0 eklendi, senkronizasyon bekliyor
@@ -44,6 +41,9 @@ export const rrrrrrrrr = `purple`;
 
 export const GetColors = `
 SELECT * FROM Colors 
+`;
+export const SetColor =(location,color)=> `
+UPDATE Colors SET value ='${color}' WHERE location = '${location}' 
 `;
 
 export const GetPasswords = `
@@ -80,7 +80,7 @@ export const UpdateUserPinCode = (pinCode)=> `
 UPDATE Settings SET value = '${pinCode}' WHERE setting = 'pinCode';
 `;
 
-export const SuggestedLightModeColors = `
+export const SuggestedColors = `
 INSERT INTO Colors ( location, locationDescription, value ) 
 VALUES 
     ('backColor', 'Uygulama Arkaplanı Rengi', '#ededed'),
@@ -89,14 +89,14 @@ VALUES
     ('cancelColor', 'İptal Rengi', '#333025');
 `;
 
-export const SuggestedDarkModeColors = `
-INSERT INTO Colors ( location, locationDescription, value ) 
-VALUES 
-    ('backColor', 'Uygulama Arkaplanı Rengi', '#222222'),
-    ('mainColor', 'Ana Renk', '#c9999f'),
-    ('passiveColor', 'Pasif Renk', '#7d6366'),
-    ('cancelColor', 'İptal Rengi', '#4c2b36');
-`;
+// export const SuggestedDarkModeColors = `
+// INSERT INTO Colors ( location, locationDescription, value ) 
+// VALUES 
+//     ('backColor', 'Uygulama Arkaplanı Rengi', '#222222'),
+//     ('mainColor', 'Ana Renk', '#c9999f'),
+//     ('passiveColor', 'Pasif Renk', '#7d6366'),
+//     ('cancelColor', 'İptal Rengi', '#4c2b36');
+// `;
 
 export const DeleteColors = `
 DELETE FROM Colors;

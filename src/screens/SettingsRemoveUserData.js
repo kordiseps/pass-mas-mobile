@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
-import { Modal } from "react-native";
 import ColorButton from "../components/ColorButton";
 import Label from "../components/Label";
+import MyModal from "../components/MyModal";
 
 export const SettingsRemoveUserData = (props) => {
   useEffect(() => {}, []);
@@ -17,7 +17,7 @@ export const SettingsRemoveUserData = (props) => {
   };
 
   return (
-    <Modal visible={props.visible} animationType="slide">
+    <MyModal visible={props.visible}>
       <View style={{ flex: 1, marginTop: 50 }}>
         <Label>Kullanıcı Veri Silme Ayarları</Label>
         <ColorButton onPress={handleRemoveAccountFromDevice}>
@@ -26,8 +26,10 @@ export const SettingsRemoveUserData = (props) => {
         <ColorButton onPress={handleRemoveAccountFromServerAndDevice}>
           Bu cihazdan ve sunuclardan kullanıcıya ait tüm verileri sil
         </ColorButton>
-        <ColorButton onPress={handleCloseSettings}>Ayarları kapat</ColorButton>
+        <ColorButton cancel onPress={handleCloseSettings}>
+          Ayarları kapat
+        </ColorButton>
       </View>
-    </Modal>
+    </MyModal>
   );
 };

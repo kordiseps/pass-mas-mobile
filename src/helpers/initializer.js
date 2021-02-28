@@ -2,7 +2,7 @@ import {
   ColorsTableInitialize,
   PaswordsTableInitialize,
   SettingsTableInitialize,
-  SuggestedLightModeColors,
+  SuggestedColors,
 } from "../constants/sqlScripts";
 import { execute } from "./sqliteconnector";
 
@@ -12,7 +12,7 @@ export function initialize() {
       await execute(PaswordsTableInitialize);
       await execute(SettingsTableInitialize);
       await execute(ColorsTableInitialize);
-      await execute(SuggestedLightModeColors);
+      await execute(SuggestedColors);
       console.log("initialize OK");
       resolve();
     } catch (error) {

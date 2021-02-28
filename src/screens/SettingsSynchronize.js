@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,useState } from "react";
 import { View } from "react-native";
-import { Modal } from "react-native";
 import ColorButton from "../components/ColorButton";
 import Label from "../components/Label";
+import Loading from "../components/Loading";
+import MyModal from "../components/MyModal";
 
 export const SettingsSynchronize = (props) => {
+  const [isSynchronizing, setSynchronizing] = useState(false);
   useEffect(() => {}, []);
   const handleSynchronize = () => {
     console.log("handleSynchronize");
@@ -14,10 +16,16 @@ export const SettingsSynchronize = (props) => {
   };
   const handleCloseSettings = () => {
     props.onClose();
+  }; 
+  const handleSynchronizee = async () => {
+    console.log("senkronizasyon isteği geldi");
+    setSynchronizing(true);
+    await synchronize();
+    setSynchronizing(false);
   };
 
   return (
-    <Modal visible={props.visible} animationType="slide">
+    <MyModal visible={props.visible}>
       <View style={{ flex: 1, marginTop: 50 }}>
         <Label>Senkronizasyon Ayarları</Label>
         <ColorButton onPress={handleSynchronize}>
@@ -26,8 +34,19 @@ export const SettingsSynchronize = (props) => {
         <ColorButton onPress={handleDeleteFromServerAndSendData}>
           Sunucudaki tüm verileri sil, cihazdaki verileri sunucuya gönder
         </ColorButton>
-        <ColorButton onPress={handleCloseSettings}>Geri</ColorButton>
+        <ColorButton cancel onPress={handleCloseSettings}>
+          Geri
+        </ColorButton>
+        {/* {isSynchronizing ? (
+            <Loading passiveColor />
+          ) : (
+            <>
+              <ColorButton color="#ff051a" onPress={handleSynchronize}>
+                Senkronize Et
+              </ColorButton>
+            </>
+          )} */}
       </View>
-    </Modal>
+    </MyModal>
   );
 };

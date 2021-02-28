@@ -9,11 +9,15 @@ const Span = styled.Text`
   text-align: center;
   font-size: 16px;
   font-weight: bold;
-  
 `;
 export default ColorButton = (props) => {
   const { colors } = useContext(ColorContext);
-  const textColor = props.color === undefined ? colors.mainColor : props.color;
+  const textColor =
+    props.color !== undefined
+      ? props.color
+      : props.cancel
+      ? colors.cancelColor
+      : colors.mainColor;
   return (
     <TouchableOpacity onPress={props.onPress}>
       <BorderedDiv>

@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components/native";
+import { ColorContext } from "../contexts/ColorContext";
 import BorderedDiv from "./BorderedDiv";
 
 const Span = styled.Text`
-  color: #000;
   text-align: center;
-  font-size: 16px;
+  font-size: 24px;
+  font-weight:800;
 `;
-export default Label = (props) => {
+export default Label = (props) => {  
+  const { colors } = useContext(ColorContext);
   return (
     <BorderedDiv>
-      <Span>{props.children}</Span>
+      <Span style={{color:colors.mainColor}}>{props.children}</Span>
     </BorderedDiv>
   );
 };

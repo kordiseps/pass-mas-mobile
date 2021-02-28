@@ -17,16 +17,16 @@ export default AddPassword = (props) => {
   const [app, setApp] = useState("");
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [color, setColor] = useState("#000000");
   const [colorPickRequested, setColorPickRequested] = useState(false);
   const { colors } = useContext(ColorContext);
+  const [color, setColor] = useState(colors.mainColor);
   useEffect(() => {}, []);
 
   function reset() {
     setApp("");
     setUserName("");
     setPassword("");
-    setColor("#000000");
+    setColor(colors.mainColor);
   }
 
   const handleSubmit = () => {
@@ -57,40 +57,40 @@ export default AddPassword = (props) => {
 
   return (
     <Modal visible={props.visible} animationType="slide">
-      <Div>
-        <Label>Yeni Parola Kaydet</Label>
-        <TextBox placeholder="Uygulama" text={app} setText={setApp} />
-        <TextBox
-          placeholder="Kullanıcı Adı"
-          text={username}
-          setText={setUserName}
-        />
-        <TextBox
-          placeholder="Parola"
-          text={password}
-          setText={setPassword}
-          isSecure
-        />
-        <ColorButton color={color} onPress={handleColorPickRequested}>
-          Renk Seç
-        </ColorButton>
-        <ColorPicker
-          visible={colorPickRequested}
-          onSelect={handleColorSelect}
-        />
+      <Div style={{ backgroundColor: colors.backColor }}>
+        <Div style={{ marginTop: 50 }}>
+          <Label>Yeni Parola Kaydet</Label>
+          <TextBox placeholder="Uygulama" text={app} setText={setApp} />
+          <TextBox
+            placeholder="Kullanıcı Adı"
+            text={username}
+            setText={setUserName}
+          />
+          <TextBox
+            placeholder="Parola"
+            text={password}
+            setText={setPassword}
+            isSecure
+          />
+          <ColorButton color={color} onPress={handleColorPickRequested}>
+            Renk Seç
+          </ColorButton>
+          <ColorPicker
+            visible={colorPickRequested}
+            onSelect={handleColorSelect}
+          />
 
-        {isSubmitting ? (
-          <Loading />
-        ) : (
-          <View>
-            <ColorButton color={colors.mainColor} onPress={handleCancel}>
-              Vazgeç
-            </ColorButton>
-            <ColorButton color={colors.mainColor} onPress={handleSubmit}>
-              Kaydet
-            </ColorButton>
-          </View>
-        )}
+          {isSubmitting ? (
+            <Loading />
+          ) : (
+            <View>
+              <ColorButton onPress={handleSubmit}>Kaydet</ColorButton>
+              <ColorButton cancel onPress={handleCancel}>
+                Vazgeç
+              </ColorButton>
+            </View>
+          )}
+        </Div>
       </Div>
     </Modal>
   );
