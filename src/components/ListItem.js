@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity,Clipboard } from "react-native";
+import { TouchableOpacity, Clipboard } from "react-native";
 import styled from "styled-components/native";
 
 const Div = styled.View`
@@ -16,15 +16,30 @@ const Text = styled.Text`
   font-size: 16px;
 `;
 
-export default ListItem = (props) => (
-  <Div>
-    <Text style={{ color: props.color, marginHorizontal: 15 }}>
-      {props.app}
-    </Text>
-    <TouchableOpacity onPress={() => Clipboard.setString(props.username)}>
-      <Text style={{ color: props.color, marginHorizontal: 15 }}>
-        {props.username}
-      </Text>
-    </TouchableOpacity>
-  </Div>
-);
+export default ListItem = (props) => {
+  const handleOnPress = () => {
+    Clipboard.setString(props.username);
+    alert("Kullanıcı Adı Kopyalandı");
+  };
+  const handleOnLongPress = () => {
+    Clipboard.setString(props.password);
+    alert("Şifre Kopyalandı");
+  };
+  const handleOnLongPressOnApp = () => {
+    console.log("detaylar")
+  };
+  return (
+    <Div>
+      <TouchableOpacity onLongPress={handleOnLongPressOnApp}>
+        <Text style={{ color: props.color, marginHorizontal: 15 }}>
+          {props.app}
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleOnPress} onLongPress={handleOnLongPress}>
+        <Text style={{ color: props.color, marginHorizontal: 15 }}>
+          {props.username}
+        </Text>
+      </TouchableOpacity>
+    </Div>
+  );
+};

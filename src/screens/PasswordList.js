@@ -70,6 +70,7 @@ class ListItemContainer extends React.PureComponent {
       <ListItem
         app={this.props.data.app}
         username={this.props.data.username}
+        password={this.props.data.password}
         color={this.props.data.color}
       />
     );
