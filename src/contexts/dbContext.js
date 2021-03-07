@@ -12,10 +12,13 @@ import {
   GetUserPinCode,
   UpdateUserPinCode,
   SetColor,
+  GetUserMail,
+  MarkPasswordDeleted,
+  DeletePassword,
+  UpdatePassword,
 } from "../constants/sqlScripts";
 
 export function GetColorsForContext() {
-  console.log("GetColorContext");
   return new Promise(async (resolve, reject) => {
     try {
       var colorsInDb = await execute(GetColors);
@@ -24,23 +27,7 @@ export function GetColorsForContext() {
       _array.forEach((element) => {
         colorsObject[element.location] = element.value;
       });
-      //console.log("GetColorContext colorsObject", colorsObject);
       resolve(colorsObject);
-    } catch (error) {
-      console.log("GetColors error", error);
-      reject(error);
-    }
-  });
-}
-
-export function SetMainColors() {
-  console.log("1");
-  return new Promise(async (resolve, reject) => {
-    try {
-      var sqlString = SetColor("mainColor","red")
-      console.log(sqlString)
-      await execute(sqlString);
-      resolve();
     } catch (error) {
       console.log("GetColors error", error);
       reject(error);
@@ -52,11 +39,11 @@ export function SetColors(val) {
   console.log("SetColorContext");
   return new Promise(async (resolve, reject) => {
     try {
-      Object.getOwnPropertyNames(val).forEach(async (propertyName)=>{
-        var sqlString = SetColor(propertyName,val[propertyName])
-        console.log(sqlString)
+      Object.getOwnPropertyNames(val).forEach(async (propertyName) => {
+        var sqlString = SetColor(propertyName, val[propertyName]);
+        console.log(sqlString);
         await execute(sqlString);
-      })   
+      });
       resolve();
     } catch (error) {
       console.log("GetColors error", error);
@@ -65,33 +52,33 @@ export function SetColors(val) {
   });
 }
 
-export function getTables() {
-  try {
-    return execute(GetTables).then((val) => val.rows._array);
-  } catch (err) {
-    console.log("GetTables err", err);
-    return {
-      errors: err,
-    };
-  }
-}
+// export function getTables() {
+//   try {
+//     return execute(GetTables).then((val) => val.rows._array);
+//   } catch (err) {
+//     console.log("GetTables err", err);
+//     return {
+//       errors: err,
+//     };
+//   }
+// }
 
-export function dbInitialize() {
-  try {
-    return execute(PaswordsTableInitialize).then(() => {
-      execute(SettingsTableInitialize).then(() => {
-        execute(ColorsTableInitialize).then(() => {
-          execute(SuggestedColors).then(() => {
-            console.log("DbInitialize OK");
-          });
-        });
-      });
-    });
-  } catch (err) {
-    console.log("dbInitialize err", err);
-    return false;
-  }
-}
+// export function dbInitialize() {
+//   try {
+//     return execute(PaswordsTableInitialize).then(() => {
+//       execute(SettingsTableInitialize).then(() => {
+//         execute(ColorsTableInitialize).then(() => {
+//           execute(SuggestedColors).then(() => {
+//             console.log("DbInitialize OK");
+//           });
+//         });
+//       });
+//     });
+//   } catch (err) {
+//     console.log("dbInitialize err", err);
+//     return false;
+//   }
+// }
 
 export function savePassword(app, username, password, color) {
   let sqlString = InsertPassword(app, username, password, color);
@@ -99,6 +86,42 @@ export function savePassword(app, username, password, color) {
     return execute(sqlString);
   } catch (err) {
     console.log("savePassword err", err);
+    return {
+      errors: err,
+    };
+  }
+}
+
+export function markPasswordDeleted(id) {
+  let sqlString = MarkPasswordDeleted(id);
+  try {
+    return execute(sqlString);
+  } catch (err) {
+    console.log("markPasswordDeleted err", err);
+    return {
+      errors: err,
+    };
+  }
+}
+
+export function deletePassword(id) {  
+  let sqlString = DeletePassword(id);
+  try {
+    return execute(sqlString);
+  } catch (err) {
+    console.log("deletePassword err", err);
+    return {
+      errors: err,
+    };
+  }
+}
+
+export function updatePassword(id, app, username, password, color) {    
+  let sqlString = UpdatePassword(id, app, username, password, color);
+  try {
+    return execute(sqlString);
+  } catch (err) {
+    console.log("updatePassword err", err);
     return {
       errors: err,
     };
@@ -129,7 +152,7 @@ export function getPasswords() {
   }
 }
 
-export async function getSetting(sqlQuery) {
+async function getSetting(sqlQuery) {
   try {
     //console.log("sqlQuery",sqlQuery)
     //var res = await execute(sqlQuery).then((val) => val.rows._array[0].value);
@@ -144,6 +167,14 @@ export async function getSetting(sqlQuery) {
       errors: err,
     };
   }
+}
+
+export function getUserMail() {
+  return getSetting(GetUserMail);
+}
+
+export function getUserPinCode() {
+  return getSetting(GetUserPinCode);
 }
 
 export async function UpdateLoginPinCode(oldPinCode, newPinCode) {

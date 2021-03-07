@@ -4,9 +4,7 @@ import styled from "styled-components/native";
 import Label from "../components/Label";
 import TextBox from "../components/TextBox";
 import ColorButton from "../components/ColorButton";
-import { ColorContext } from "../contexts/ColorContext";
-import { getSetting } from "../contexts/dbContext";
-import { GetUserMail, GetUserPinCode } from "../constants/sqlScripts";
+import { getUserPinCode, getUserMail } from "../contexts/dbContext";
 import Loading from "../components/Loading";
 
 const Div = styled.View`
@@ -17,8 +15,6 @@ export default Login = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [pinCode, setPinCode] = useState("");
   const [userName, setUserName] = useState("");
-
-  const { colors } = useContext(ColorContext);
 
   useEffect(() => {
     async function prepareData() {
@@ -40,7 +36,7 @@ export default Login = (props) => {
   return (
     <Div>
       {isLoading ? (
-        <Loading size={150}/>
+        <Loading size={150} />
       ) : (
         <View>
           <Label>{userName}</Label>
@@ -65,11 +61,3 @@ const AsyncAlert = (title, message) => {
     );
   });
 };
-
-function getUserMail() {
-  return getSetting(GetUserMail);
-}
-
-function getUserPinCode() {
-  return getSetting(GetUserPinCode);
-}

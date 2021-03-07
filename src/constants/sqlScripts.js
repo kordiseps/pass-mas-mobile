@@ -28,7 +28,6 @@ export const GetTables = `
 SELECT * FROM sqlite_master WHERE type='table';
 `;
 
-
 //Paswords state:
 //0 eklendi, senkronizasyon bekliyor
 //1 değiştirildi, senkronizasyon bekliyor
@@ -42,12 +41,12 @@ SELECT * FROM sqlite_master WHERE type='table';
 export const GetColors = `
 SELECT * FROM Colors 
 `;
-export const SetColor =(location,color)=> `
+export const SetColor = (location, color) => `
 UPDATE Colors SET value ='${color}' WHERE location = '${location}' 
 `;
 
 export const GetPasswords = `
-SELECT * FROM Paswords;
+SELECT * FROM Paswords WHERE state != 2;
 `;
 
 export const InsertPassword = (app, userName, password, color) => `
@@ -55,8 +54,31 @@ INSERT INTO Paswords ( app, userName, password, color, state )
 VALUES ('${app}','${userName}','${password}','${color}', 0);
 `;
 
+export const UpdatePassword = (id, app, userName, password, color) => `
+UPDATE Paswords 
+SET app = '${app}', userName = '${userName}', password = '${password}', color = '${color}', state = 1 
+WHERE id = ${id};
+`;
+
+export const MarkPasswordSynchronized = (id) => `
+UPDATE Paswords 
+SET state = 3
+WHERE id = ${id};
+`;
+
+export const MarkPasswordDeleted = (id) => `
+UPDATE Paswords 
+SET state = 2
+WHERE id = ${id};
+`;
+
+export const DeletePassword = (id) => `
+DELETE FROM Paswords
+WHERE id = ${id};
+`;
+
 export const InsertApiIdPassword = (id, apiId) => `
-UPDATE Paswords SET apiId ='${apiId}', state = 3 WHERE id = ${id};
+UPDATE Paswords SET apiId ='${apiId}' WHERE id = ${id};
 `;
 
 export const InsertUser = (userMail, pinCode) => `
@@ -76,7 +98,7 @@ SELECT * FROM Settings WHERE setting = 'userMail';
 export const GetUserPinCode = `
 SELECT * FROM Settings WHERE setting = 'pinCode';
 `;
-export const UpdateUserPinCode = (pinCode)=> `
+export const UpdateUserPinCode = (pinCode) => `
 UPDATE Settings SET value = '${pinCode}' WHERE setting = 'pinCode';
 `;
 
@@ -90,8 +112,8 @@ VALUES
 `;
 
 // export const SuggestedDarkModeColors = `
-// INSERT INTO Colors ( location, locationDescription, value ) 
-// VALUES 
+// INSERT INTO Colors ( location, locationDescription, value )
+// VALUES
 //     ('backColor', 'Uygulama Arkaplanı Rengi', '#222222'),
 //     ('mainColor', 'Ana Renk', '#c9999f'),
 //     ('passiveColor', 'Pasif Renk', '#7d6366'),

@@ -18,18 +18,16 @@ export const SettingsRemoveUserData = (props) => {
 
   return (
     <MyModal visible={props.visible}>
-      <View style={{ flex: 1, marginTop: 50 }}>
-        <Label>Kullanıcı Veri Silme Ayarları</Label>
-        <ColorButton onPress={handleRemoveAccountFromDevice}>
-          Bu cihazdan kullanıcıya ait tüm verileri sil
-        </ColorButton>
-        <ColorButton onPress={handleRemoveAccountFromServerAndDevice}>
-          Bu cihazdan ve sunuclardan kullanıcıya ait tüm verileri sil
-        </ColorButton>
-        <ColorButton cancel onPress={handleCloseSettings}>
-          Ayarları kapat
-        </ColorButton>
-      </View>
+      <Label>Kullanıcı Veri Silme Ayarları</Label>
+      <ColorButton onPress={handleRemoveAccountFromDevice}>
+        Bu cihazdan kullanıcıya ait tüm verileri sil
+      </ColorButton>
+      <ColorButton onPress={handleRemoveAccountFromServerAndDevice}>
+        Bu cihazdan ve sunuclardan kullanıcıya ait tüm verileri sil
+      </ColorButton>
+      <ColorButton cancel onPress={handleCloseSettings}>
+        Ayarları kapat
+      </ColorButton>
     </MyModal>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet } from "react-native";
 import { Settings } from "../screens/Settings";
 import ColorButton from "./ColorButton";
@@ -8,9 +8,10 @@ import { ColorContext } from "../contexts/ColorContext";
 const Div = styled.View`
   width: 100%;
   height: 50px;
-  padding: 3%;
+  padding-top: 3%;
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
 `;
 const Text = styled.Text`
@@ -18,6 +19,9 @@ const Text = styled.Text`
   font-size: 24px;
 `;
 
+const SmallDiv = styled(Div)`
+  width: 30%;
+`;
 const Header = (props) => {
   const { colors } = useContext(ColorContext);
   const [settings, setSettings] = useState(false);
@@ -30,9 +34,11 @@ const Header = (props) => {
     <Div style={{ backgroundColor: colors.backColor }}>
       <Text style={{ color: colors.mainColor }}>PASS-MAS</Text>
       {props.isLoggedIn ? (
-        <ColorButton onPress={handleOpenSettings}>🔧</ColorButton>
+        <SmallDiv>
+          <ColorButton onPress={handleOpenSettings}>🔧</ColorButton>
+        </SmallDiv>
       ) : (
-        <Text/>
+        <Text />
       )}
       <Settings
         visible={settings}

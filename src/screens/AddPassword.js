@@ -7,6 +7,8 @@ import ColorPicker from "./ColorPicker";
 import ColorButton from "../components/ColorButton";
 import { ColorContext } from "../contexts/ColorContext";
 import Loading from "../components/Loading";
+import Choise from "../components/Choise";
+import MyModal from "../components/MyModal";
 
 const Div = styled.View`
   flex: 1;
@@ -56,42 +58,35 @@ export default AddPassword = (props) => {
   };
 
   return (
-    <Modal visible={props.visible} animationType="slide">
-      <Div style={{ backgroundColor: colors.backColor }}>
-        <Div style={{ marginTop: 50 }}>
-          <Label>Yeni Parola Kaydet</Label>
-          <TextBox placeholder="Uygulama" text={app} setText={setApp} />
-          <TextBox
-            placeholder="Kullanıcı Adı"
-            text={username}
-            setText={setUserName}
-          />
-          <TextBox
-            placeholder="Parola"
-            text={password}
-            setText={setPassword}
-            isSecure
-          />
-          <ColorButton color={color} onPress={handleColorPickRequested}>
-            Renk Seç
-          </ColorButton>
-          <ColorPicker
-            visible={colorPickRequested}
-            onSelect={handleColorSelect}
-          />
+    <MyModal visible={props.visible}>
+      <Label>Yeni Parola Kaydet</Label>
+      <TextBox placeholder="Uygulama" text={app} setText={setApp} />
+      <TextBox
+        placeholder="Kullanıcı Adı"
+        text={username}
+        setText={setUserName}
+      />
+      <TextBox
+        placeholder="Parola"
+        text={password}
+        setText={setPassword}
+        isSecure
+      />
+      <ColorButton color={color} onPress={handleColorPickRequested}>
+        Renk Seç
+      </ColorButton>
+      <ColorPicker visible={colorPickRequested} onSelect={handleColorSelect} />
 
-          {isSubmitting ? (
-            <Loading />
-          ) : (
-            <View>
-              <ColorButton onPress={handleSubmit}>Kaydet</ColorButton>
-              <ColorButton cancel onPress={handleCancel}>
-                Vazgeç
-              </ColorButton>
-            </View>
-          )}
-        </Div>
-      </Div>
-    </Modal>
+      {isSubmitting ? (
+        <Loading />
+      ) : (
+        <Choise
+          onOk={handleSubmit}
+          Ok="Kaydet"
+          onCancel={handleCancel}
+          Cancel="Vazgeç"
+        />
+      )}
+    </MyModal>
   );
 };
