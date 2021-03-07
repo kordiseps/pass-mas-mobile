@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import ColorButton from "../components/ColorButton";
 import Label from "../components/Label";
@@ -16,7 +16,7 @@ export const SettingsSynchronize = (props) => {
   };
   const handleCloseSettings = () => {
     props.onClose();
-  }; 
+  };
   const handleSynchronizee = async () => {
     console.log("senkronizasyon isteği geldi");
     setSynchronizing(true);
@@ -26,18 +26,17 @@ export const SettingsSynchronize = (props) => {
 
   return (
     <MyModal visible={props.visible}>
-      <View style={{ flex: 1, marginTop: 50 }}>
-        <Label>Senkronizasyon Ayarları</Label>
-        <ColorButton onPress={handleSynchronize}>
-          Tüm verileri sunucuyla senkronize et
-        </ColorButton>
-        <ColorButton onPress={handleDeleteFromServerAndSendData}>
-          Sunucudaki tüm verileri sil, cihazdaki verileri sunucuya gönder
-        </ColorButton>
-        <ColorButton cancel onPress={handleCloseSettings}>
-          Geri
-        </ColorButton>
-        {/* {isSynchronizing ? (
+      <Label>Senkronizasyon Ayarları</Label>
+      <ColorButton onPress={handleSynchronize}>
+        Tüm verileri sunucuyla senkronize et
+      </ColorButton>
+      <ColorButton onPress={handleDeleteFromServerAndSendData}>
+        Sunucudaki tüm verileri sil, cihazdaki verileri sunucuya gönder
+      </ColorButton>
+      <ColorButton cancel onPress={handleCloseSettings}>
+        Geri
+      </ColorButton>
+      {/* {isSynchronizing ? (
             <Loading passiveColor />
           ) : (
             <>
@@ -46,7 +45,6 @@ export const SettingsSynchronize = (props) => {
               </ColorButton>
             </>
           )} */}
-      </View>
     </MyModal>
   );
 };

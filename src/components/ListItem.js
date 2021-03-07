@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { TouchableOpacity, Clipboard } from "react-native";
 import styled from "styled-components/native";
+import PasswordDetail from "../screens/PasswordDetail";
 
 const Div = styled.View`
   width: 100%;
@@ -17,6 +18,7 @@ const Text = styled.Text`
 `;
 
 export default ListItem = (props) => {
+  const [editRequested, setEditRequested] = useState(false);
   const handleOnPress = () => {
     Clipboard.setString(props.username);
     alert("Kullanıcı Adı Kopyalandı");
@@ -26,7 +28,18 @@ export default ListItem = (props) => {
     alert("Şifre Kopyalandı");
   };
   const handleOnLongPressOnApp = () => {
-    console.log("detaylar")
+    setEditRequested(true);
+  };
+  const handleCancel = () => {
+    setEditRequested(false);
+  };
+  const handleSave = (app, username, password, color) => {
+    props.onUpdate(props.id,app, username, password, color)
+    setEditRequested(false);
+  };
+  const handleDelete = () => {
+    props.onDelete()
+    setEditRequested(false);
   };
   return (
     <Div>
@@ -40,6 +53,13 @@ export default ListItem = (props) => {
           {props.username}
         </Text>
       </TouchableOpacity>
+      <PasswordDetail
+        data={props}
+        visible={editRequested}
+        onCancel={handleCancel}
+        onUpdate={handleSave}
+        onDelete={handleDelete}
+      />
     </Div>
   );
 };

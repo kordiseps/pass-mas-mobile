@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, FlatList } from "react-native";
 import styled from "styled-components/native";
-import { getPasswords, savePassword } from "../contexts/dbContext";
+import { deletePassword, getPasswords, savePassword, updatePassword } from "../contexts/dbContext";
 import { synchronize } from "../helpers/synchronizer";
 import ColorButton from "../components/ColorButton";
 import ListItem from "../components/ListItem";
@@ -39,6 +39,15 @@ export default PasswordList = (props) => {
   const handleCancel = () => {
     setAddRequested(false);
   };
+  const handleDelete = (id) => {
+    //console.log("handleDelete", id);
+    deletePassword(id)
+      .then(loadPasswords)
+  };
+  const handleUpdate = (id, app, username, password, color) => {
+    updatePassword(id, app, username, password, color)
+      .then(loadPasswords) 
+  };
 
   return (
     <Div>
@@ -48,7 +57,13 @@ export default PasswordList = (props) => {
         <View style={{ flex: 1 }}>
           <FlatList
             data={passwordList}
-            renderItem={({ item }) => <ListItemContainer data={item} />}
+            renderItem={({ item }) => (
+              <ListItemContainer
+                data={item}
+                onDelete={() => handleDelete(item.id)}
+                onUpdate={handleUpdate}
+              />
+            )}
             keyExtractor={(item) => item.id.toString()}
             ItemSeparatorComponent={renderSeparator}
           />
@@ -68,10 +83,13 @@ class ListItemContainer extends React.PureComponent {
   render() {
     return (
       <ListItem
+        id={this.props.data.id}
         app={this.props.data.app}
         username={this.props.data.username}
         password={this.props.data.password}
         color={this.props.data.color}
+        onDelete={this.props.onDelete}
+        onUpdate={this.props.onUpdate}
       />
     );
   }

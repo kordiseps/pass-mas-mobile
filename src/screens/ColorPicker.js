@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Modal, Text, TouchableOpacity, FlatList } from "react-native";
+import { View,  Text, TouchableOpacity, FlatList } from "react-native";
 import styled from "styled-components/native";
 import TextBox from "../components/TextBox";
-import colorsData from "../constants/colorList.json"; 
+import colorsData from "../constants/colorList.json";
 import { ColorContext } from "../contexts/ColorContext";
+import MyModal from "../components/MyModal";
 
 const Div = styled.View`
   flex: 1;
@@ -42,23 +43,19 @@ export default ColorPicker = (props) => {
   };
 
   return (
-    <Modal visible={props.visible} animationType="slide">
-      <Div style={{ backgroundColor: colors.backColor }}>
-        <Div style={{ flex: 1, marginTop: 50 }}>
-          <TextBox placeholder="Renk Ara" setText={handleSearch} />
-          <FlatList
-            data={color}
-            renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => handleSelect(item.code)}>
-                <ListItem id={item.id} value={item.code} name={item.name} />
-              </TouchableOpacity>
-            )}
-            keyExtractor={(item) => item.id.toString()}
-            ItemSeparatorComponent={renderSeparator}
-          />
-        </Div>
-      </Div>
-    </Modal>
+    <MyModal visible={props.visible}>
+      <TextBox placeholder="Renk Ara" setText={handleSearch} />
+      <FlatList
+        data={color}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => handleSelect(item.code)}>
+            <ListItem id={item.id} value={item.code} name={item.name} />
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item) => item.id.toString()}
+        ItemSeparatorComponent={renderSeparator}
+      />
+    </MyModal>
   );
 };
 

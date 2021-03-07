@@ -1,10 +1,10 @@
 import { postData, login } from "./apiconnector";
 import {
   getPasswords,
-  getSetting,
+  getUserMail,
+  getUserPinCode,
   insertApiIdPassword,
 } from "../contexts/dbContext";
-import { GetUserMail, GetUserPinCode } from "../constants/sqlScripts";
 
 export async function synchronize() {
   console.log("synchronize bg");
@@ -26,9 +26,10 @@ export async function synchronize() {
     if (element.state === 0) {
       console.log("eklenecek ", element);
       const res = await postData(element, key);
-      console.log("api post data sonucu",res)
+      console.log("api post data sonucu", res);
       if (res.isSuccess === true) {
         insertApiIdPassword(element.id, res.message);
+        //mark updated
       } else {
         console.log("apiye data gönderilemedi");
       }
@@ -41,12 +42,4 @@ export async function synchronize() {
       console.log("güncel ", element);
     }
   }
-}
-
-function getUserMail() {
-  return getSetting(GetUserMail);
-}
-
-function getUserPinCode() {
-  return getSetting(GetUserPinCode);
 }

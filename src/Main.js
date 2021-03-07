@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
 import Header from "./components/Header";
 import Register from "./screens/Register";
-import * as FileSystem from "expo-file-system";
 import PasswordList from "./screens/PasswordList";
 import Login from "./screens/Login";
 import { ColorContext } from "./contexts/ColorContext";
-import { GetColorsForContext, SetMainColors } from "./contexts/dbContext";
+import { GetColorsForContext } from "./contexts/dbContext";
 import { isFirst } from "./helpers/sqliteconnector";
 import Loading from "./components/Loading";
 
@@ -22,12 +21,10 @@ export default function Main() {
   });
   useEffect(() => {
     async function prepare() {
-      const isFirstUsage = await isFirst()
+      const isFirstUsage = await isFirst();
       if (!isFirstUsage) {
-        //await SetMainColors()
-        
         const colorsFromDb = await GetColorsForContext();
-        setColors(colorsFromDb)
+        setColors(colorsFromDb);
         setFirst(false);
         setLoading(false);
       } else {
@@ -39,11 +36,13 @@ export default function Main() {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: 20, backgroundColor:colors.backColor }}>
-      <ColorContext.Provider value={{colors, setColors}}>
+    <SafeAreaView
+      style={{ flex: 1, paddingTop: 20, backgroundColor: colors.backColor }}
+    >
+      <ColorContext.Provider value={{ colors, setColors }}>
         <Header isLoggedIn={loggedIn} />
         {loading ? (
-          <Loading size={150}/>
+          <Loading size={150} />
         ) : first ? (
           <Register registered={() => setFirst(false)} />
         ) : !loggedIn ? (

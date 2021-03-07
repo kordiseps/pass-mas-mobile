@@ -88,36 +88,33 @@ export const SettingsColorTheme = (props) => {
   // });
   return (
     <MyModal visible={props.visible}>
-      <View style={{ flex: 1, marginTop: 50 }}>
-        <Label>Tema Ayarları</Label>
-        <ColorButton onPress={handleChangeMainColor}>
-          Ana Rengi Ayarla
-          <Text style={{ color: colors.mainColor }}>@</Text>
-        </ColorButton>
-        <ColorButton onPress={handleChangePassiveColor}>
-          Pasif Rengi Ayarla
-          <Text style={{ color: colors.passiveColor }}>@</Text>
-        </ColorButton>
-        <ColorButton onPress={handleChangeBackColor}>
-          Arkaplan Rengi Ayarla
-          <Text style={{ color: colors.backColor }}>@</Text>
-        </ColorButton>
-        <ColorButton onPress={handleChangeCancelColor}>
-          İptal Rengi Ayarla
-          <Text style={{ color: colors.cancelColor }}>@</Text>
-        </ColorButton>
-        <ColorButton onPress={handleApplyLightTheme}>
-          Varsayılan Açık Tema Ayarlarını Uygula
-        </ColorButton>
-        <ColorButton onPress={handleApplyDarkTheme}>
-          Varsayılan Koyu Tema Ayarlarını Uygula
-        </ColorButton>
-        <ColorButton cancel onPress={handleCloseSettings}>Geri</ColorButton>
-        <ColorPicker
-          visible={colorPickRequested}
-          onSelect={handleColorSelect}
-        />
-      </View>
+      <Label>Tema Ayarları</Label>
+      <ColorButton onPress={handleChangeMainColor}>
+        Ana Rengi Ayarla
+        <Text style={{ color: colors.mainColor }}>@</Text>
+      </ColorButton>
+      <ColorButton onPress={handleChangePassiveColor}>
+        Pasif Rengi Ayarla
+        <Text style={{ color: colors.passiveColor }}>@</Text>
+      </ColorButton>
+      <ColorButton onPress={handleChangeBackColor}>
+        Arkaplan Rengi Ayarla
+        <Text style={{ color: colors.backColor }}>@</Text>
+      </ColorButton>
+      <ColorButton onPress={handleChangeCancelColor}>
+        İptal Rengi Ayarla
+        <Text style={{ color: colors.cancelColor }}>@</Text>
+      </ColorButton>
+      <ColorButton onPress={handleApplyLightTheme}>
+        Varsayılan Açık Tema Ayarlarını Uygula
+      </ColorButton>
+      <ColorButton onPress={handleApplyDarkTheme}>
+        Varsayılan Koyu Tema Ayarlarını Uygula
+      </ColorButton>
+      <ColorButton cancel onPress={handleCloseSettings}>
+        Geri
+      </ColorButton>
+      <ColorPicker visible={colorPickRequested} onSelect={handleColorSelect} />
     </MyModal>
   );
 };

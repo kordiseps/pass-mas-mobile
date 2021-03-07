@@ -5,6 +5,7 @@ import { SettingsPassword as SettingsPinCode } from "./SettingsPinCode";
 import { SettingsRemoveUserData } from "./SettingsRemoveUserData";
 import { SettingsSynchronize } from "./SettingsSynchronize";
 import MyModal from "../components/MyModal";
+import Label from "../components/Label";
 
 export const Settings = (props) => {
   const [passwordSettings, setPasswordSettings] = useState(false);
@@ -30,6 +31,7 @@ export const Settings = (props) => {
 
   return (
     <MyModal visible={props.visible}>
+      <Label>Ayarlar</Label>
       <ColorButton onPress={handleUserPasswordSettings}>
         Kullanıcı Pin Kodu Ayarları
       </ColorButton>

@@ -4,6 +4,9 @@ import styled from "styled-components/native";
 import { ColorContext } from "../contexts/ColorContext";
 import BorderedDiv from "./BorderedDiv";
 
+const Div = styled.View`
+  width:100%;
+`;
 const Span = styled.Text`
   color: #000;
   text-align: center;
@@ -19,10 +22,12 @@ export default ColorButton = (props) => {
       ? colors.cancelColor
       : colors.mainColor;
   return (
-    <TouchableOpacity onPress={props.onPress}>
-      <BorderedDiv>
-        <Span style={{ color: textColor }}>{props.children}</Span>
-      </BorderedDiv>
-    </TouchableOpacity>
+    <Div>
+      <TouchableOpacity onPress={props.onPress}>
+        <BorderedDiv>
+          <Span style={{ color: textColor }}>{props.children}</Span>
+        </BorderedDiv>
+      </TouchableOpacity>
+    </Div>
   );
 };
