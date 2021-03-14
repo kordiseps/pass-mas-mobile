@@ -1,18 +1,27 @@
-import React, { useEffect } from "react";
-import { View } from "react-native";
+import React, { useEffect } from "react"; 
 import ColorButton from "../components/ColorButton";
 import Label from "../components/Label";
 import MyModal from "../components/MyModal";
+import { DropAccount } from "../contexts/dbContext";
+import { DropAccountFromServer } from "../helpers/apiconnector";
 
 export const SettingsRemoveUserData = (props) => {
   useEffect(() => {}, []);
-  const handleRemoveAccountFromDevice = () => {
-    console.log("handleRemoveAccountFromDevice");
+  async function handleRemoveAccountFromDevice(){
+    await DropAccount()
+    props.onDropAccount()
   };
-  const handleRemoveAccountFromServerAndDevice = () => {
-    console.log("handleRemoveAccountFromServerAndDevice");
+  async function handleRemoveAccountFromServerAndDevice() {
+    var result = await DropAccountFromServer()
+    if (result) {
+      await DropAccount() 
+      props.onDropAccount()
+    }
+    else {
+      alert("Sunucudan veriler silinemedi")
+    }
   };
-  const handleCloseSettings = () => {
+  function handleCloseSettings(){
     props.onClose();
   };
 

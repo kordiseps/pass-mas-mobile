@@ -123,3 +123,13 @@ VALUES
 export const DeleteColors = `
 DELETE FROM Colors;
 `;
+
+export const DropColors=`
+DROP TABLE Colors;
+`
+export const DropPaswords=`
+DROP TABLE Paswords;
+`
+export const DropSettings=`
+DROP TABLE Settings;
+`

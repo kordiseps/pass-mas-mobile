@@ -16,6 +16,9 @@ import {
   MarkPasswordDeleted,
   DeletePassword,
   UpdatePassword,
+  DropColors,
+  DropPaswords,
+  DropSettings,
 } from "../constants/sqlScripts";
 
 export function GetColorsForContext() {
@@ -104,7 +107,7 @@ export function markPasswordDeleted(id) {
   }
 }
 
-export function deletePassword(id) {  
+export function deletePassword(id) {
   let sqlString = DeletePassword(id);
   try {
     return execute(sqlString);
@@ -116,7 +119,7 @@ export function deletePassword(id) {
   }
 }
 
-export function updatePassword(id, app, username, password, color) {    
+export function updatePassword(id, app, username, password, color) {
   let sqlString = UpdatePassword(id, app, username, password, color);
   try {
     return execute(sqlString);
@@ -154,7 +157,7 @@ export function getPasswords() {
 
 async function getSetting(sqlQuery) {
   try {
-    //console.log("sqlQuery",sqlQuery)
+    console.log("sqlQuery",sqlQuery)
     //var res = await execute(sqlQuery).then((val) => val.rows._array[0].value);
     var val = await execute(sqlQuery); //.then((val) => val.rows._array[0].value);
     //console.log("val",val)
@@ -188,5 +191,17 @@ export async function UpdateLoginPinCode(oldPinCode, newPinCode) {
     return "BAŞARILI";
   } catch (error) {
     return "BAŞARISIZ, " + error;
+  }
+}
+
+export async function DropAccount() {
+  try {
+    await execute(DropColors);
+    await execute(DropPaswords);
+    await execute(DropSettings);
+    return true;
+  } catch (error) {
+    console.log("DropAccount", err);
+    return false;
   }
 }

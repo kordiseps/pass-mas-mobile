@@ -10,6 +10,7 @@ import { isFirst } from "./helpers/sqliteconnector";
 import Loading from "./components/Loading";
 
 export default function Main() {
+  const [dropped, setDropped] = useState(false);
   const [loading, setLoading] = useState(true);
   const [first, setFirst] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -21,6 +22,7 @@ export default function Main() {
   });
   useEffect(() => {
     async function prepare() {
+      console.log("prepare");
       const isFirstUsage = await isFirst();
       if (!isFirstUsage) {
         const colorsFromDb = await GetColorsForContext();
@@ -28,19 +30,22 @@ export default function Main() {
         setFirst(false);
         setLoading(false);
       } else {
-        setFirst(true);
         setLoading(false);
       }
     }
     prepare();
-  }, []);
-
+  }, [dropped]);
+  function handleDropAccount() {
+    //setLoggedIn(false);
+    setFirst(true);
+    setDropped(true);
+  }
   return (
     <SafeAreaView
       style={{ flex: 1, paddingTop: 20, backgroundColor: colors.backColor }}
     >
       <ColorContext.Provider value={{ colors, setColors }}>
-        <Header isLoggedIn={loggedIn} />
+        <Header isLoggedIn={loggedIn} onDropAccount={handleDropAccount} />
         {loading ? (
           <Loading size={150} />
         ) : first ? (

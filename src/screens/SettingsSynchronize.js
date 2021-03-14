@@ -4,12 +4,14 @@ import ColorButton from "../components/ColorButton";
 import Label from "../components/Label";
 import Loading from "../components/Loading";
 import MyModal from "../components/MyModal";
+import { synchronize } from "../helpers/synchronizer";
 
 export const SettingsSynchronize = (props) => {
   const [isSynchronizing, setSynchronizing] = useState(false);
   useEffect(() => {}, []);
   const handleSynchronize = () => {
-    console.log("handleSynchronize");
+    //console.log("handleSynchronize");
+    handleSynchronizee()
   };
   const handleDeleteFromServerAndSendData = () => {
     console.log("handleDeleteFromServerAndSendData");
@@ -17,7 +19,7 @@ export const SettingsSynchronize = (props) => {
   const handleCloseSettings = () => {
     props.onClose();
   };
-  const handleSynchronizee = async () => {
+  const handleSynchronizee = async () => {    
     console.log("senkronizasyon isteği geldi");
     setSynchronizing(true);
     await synchronize();
