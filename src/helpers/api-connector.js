@@ -3,8 +3,8 @@ import {
   LoginUrl,
   RegisterUrl,
   RemoveAccountUrl,
-} from "../constants/apiUrls";
-import { getUserMail, getUserPinCode } from "../contexts/dbContext";
+} from "../constants/api-urls";
+import { getUserMail, getUserPinCode } from "../contexts/db-context";
 
 export async function makeRequest(uri, method, data) {
   //console.log("makeRequest bg", uri, method, JSON.stringify(data));

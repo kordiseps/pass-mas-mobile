@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
-import Header from "./components/Header";
-import Register from "./screens/Register";
-import PasswordList from "./screens/PasswordList";
-import Login from "./screens/Login";
-import { ColorContext } from "./contexts/ColorContext";
-import { GetColorsForContext } from "./contexts/dbContext";
-import { isFirst } from "./helpers/sqliteconnector";
-import Loading from "./components/Loading";
+import Header from "./components/header";
+import Register from "./screens/register";
+import PasswordList from "./screens/password-list";
+import Login from "./screens/login";
+import { ColorContext } from "./contexts/color-context";
+import { GetColorsForContext } from "./contexts/db-context";
+import { isFirst } from "./helpers/sqlite-connector";
+import Loading from "./components/loading";
 
 export default function Main() {
   const [dropped, setDropped] = useState(false);

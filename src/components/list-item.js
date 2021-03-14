@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TouchableOpacity, Clipboard } from "react-native";
 import styled from "styled-components/native";
-import PasswordDetail from "../screens/PasswordDetail";
+import PasswordDetail from "../screens/password-detail";
 
 const Div = styled.View`
   width: 100%;

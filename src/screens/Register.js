@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Alert } from "react-native";
-import TextBox from "../components/TextBox";
+import React, { useState } from "react"; 
+import TextBox from "../components/text-box";
 import styled from "styled-components/native";
-import { submitRegisterForm } from "../helpers/apiconnector";
+import { submitRegisterForm } from "../helpers/api-connector";
 import { initialize } from "../helpers/initializer";
-import { InsertUser } from "../constants/sqlScripts";
-import { execute } from "../helpers/sqliteconnector";
-import Loading from "../components/Loading";
+import { InsertUser } from "../constants/sql-scripts";
+import { execute } from "../helpers/sqlite-connector";
+import Loading from "../components/loading";
+import { AsyncAlert } from "../components/async-alert";
 
 const Div = styled.View`
   flex: 1;
@@ -18,10 +18,11 @@ export default Register = (props) => {
   const [confirmPinCode, setConfirmPinCode] = useState("123123");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async () => {
+  async function handleSubmit() {
     setIsSubmitting(true);
     if (pinCode !== confirmPinCode) {
       await AsyncAlert("Hatalı İşlem", "Pin kodları eşleşmiyor");
+      setIsSubmitting(false);
     } else {
       let response = await submitRegisterForm(email, pinCode);
       if (response.isSuccess) {
@@ -42,7 +43,7 @@ export default Register = (props) => {
         setIsSubmitting(false);
       }
     }
-  };
+  }
   return (
     <Div>
       <TextBox placeholder="E Mail" text={email} setText={setEmail} />
@@ -71,19 +72,7 @@ export default Register = (props) => {
   );
 };
 
-const AsyncAlert = (title, message) => {
-  return new Promise((resolve, reject) => {
-    Alert.alert(
-      title,
-      message,
-      [
-        { text: "Tamam", onPress: () => resolve("YES") },
-        //{text: 'NO', onPress: () => resolve('NO') }
-      ],
-      { cancelable: false }
-    );
-  });
-};
+
 
 export function saveUser(userMail, pinCode) {
   return new Promise(async (resolve, reject) => {

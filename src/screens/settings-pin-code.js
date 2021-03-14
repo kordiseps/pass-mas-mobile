@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Keyboard } from "react-native";
-import ColorButton from "../components/ColorButton";
-import Label from "../components/Label";
-import Loading from "../components/Loading";
-import TextBox from "../components/TextBox";
-import { UpdateLoginPinCode } from "../contexts/dbContext";
-import MyModal from "../components/MyModal";
+import ColorButton from "../components/color-button";
+import Label from "../components/label";
+import Loading from "../components/loading";
+import TextBox from "../components/text-box";
+import { UpdateLoginPinCode } from "../contexts/db-context";
+import MyModal from "../components/my-modal";
 
 export const SettingsPassword = (props) => {
   const [oldPassword, setOldPassword] = useState("");

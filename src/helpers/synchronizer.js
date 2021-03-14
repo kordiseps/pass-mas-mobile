@@ -1,11 +1,11 @@
-import { postData, login, makeRequestWithKey } from "./apiconnector";
-import { RemoveAccountUrl } from "../constants/apiUrls";
+import { postData, login, makeRequestWithKey } from "./api-connector";
+import { RemoveAccountUrl } from "../constants/api-urls";
 import {
   getPasswords,
   getUserMail,
   getUserPinCode,
   insertApiIdPassword,
-} from "../contexts/dbContext";
+} from "../contexts/db-context";
 
 export async function synchronize() {
   console.log("synchronize bg");

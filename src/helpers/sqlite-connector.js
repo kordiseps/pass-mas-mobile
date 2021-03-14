@@ -1,5 +1,5 @@
 import * as SQLite from "expo-sqlite";
-import { GetPasswords } from "../constants/sqlScripts";
+import { GetPasswords } from "../constants/sql-scripts";
 
 export function execute(sqlString) {
   db = SQLite.openDatabase("app.db");

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import ColorButton from "./ColorButton";
+import ColorButton from "./color-button";
 
 const Div = styled.View`
   width: 100%;

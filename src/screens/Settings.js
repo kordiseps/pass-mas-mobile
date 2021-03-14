@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import ColorButton from "../components/ColorButton";
-import { SettingsColorTheme } from "./SettingsColorTheme";
-import { SettingsPassword as SettingsPinCode } from "./SettingsPinCode";
-import { SettingsRemoveUserData } from "./SettingsRemoveUserData";
-import { SettingsSynchronize } from "./SettingsSynchronize";
-import MyModal from "../components/MyModal";
-import Label from "../components/Label";
+import ColorButton from "../components/color-button";
+import { SettingsColorTheme } from "./settings-color-theme";
+import { SettingsPassword as SettingsPinCode } from "./settings-pin-code";
+import { SettingsRemoveUserData } from "./settings-remove-user-data";
+import { SettingsSynchronize } from "./settings-synchronize";
+import MyModal from "../components/my-modal";
+import Label from "../components/label";
 
 export const Settings = (props) => {
   const [passwordSettings, setPasswordSettings] = useState(false);

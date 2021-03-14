@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import { View, Alert } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View } from "react-native";
 import styled from "styled-components/native";
-import Label from "../components/Label";
-import TextBox from "../components/TextBox";
-import ColorButton from "../components/ColorButton";
-import { getUserPinCode, getUserMail } from "../contexts/dbContext";
-import Loading from "../components/Loading";
+import Label from "../components/label";
+import TextBox from "../components/text-box";
+import ColorButton from "../components/color-button";
+import { getUserPinCode, getUserMail } from "../contexts/db-context";
+import Loading from "../components/loading";
+import { AsyncAlert } from "../components/async-alert";
 
 const Div = styled.View`
   flex: 1;
@@ -15,7 +16,6 @@ export default Login = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [pinCode, setPinCode] = useState("");
   const [userName, setUserName] = useState("");
-
   useEffect(() => {
     async function prepareData() {
       var userMail = await getUserMail();
@@ -46,18 +46,4 @@ export default Login = (props) => {
       )}
     </Div>
   );
-};
-
-const AsyncAlert = (title, message) => {
-  return new Promise((resolve, reject) => {
-    Alert.alert(
-      title,
-      message,
-      [
-        { text: "Tamam", onPress: () => resolve("YES") },
-        //{text: 'NO', onPress: () => resolve('NO') }
-      ],
-      { cancelable: false }
-    );
-  });
 };

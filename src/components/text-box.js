@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components/native";
-import { ColorContext } from "../contexts/ColorContext";
-import BorderedDiv from "./BorderedDiv";
+import { ColorContext } from "../contexts/color-context";
+import BorderedDiv from "./bordered-div";
 
 const Input = styled.TextInput`
   text-align: left;

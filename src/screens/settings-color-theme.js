@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, Text } from "react-native";
-import ColorButton from "../components/ColorButton";
-import Label from "../components/Label";
-import { ColorContext } from "../contexts/ColorContext";
-import { SetColors } from "../contexts/dbContext";
-import MyModal from "../components/MyModal";
+import ColorButton from "../components/color-button";
+import Label from "../components/label";
+import { ColorContext } from "../contexts/color-context";
+import { SetColors } from "../contexts/db-context";
+import MyModal from "../components/my-modal";
 
 export const SettingsColorTheme = (props) => {
   const [callBack, setCallBack] = useState(null);

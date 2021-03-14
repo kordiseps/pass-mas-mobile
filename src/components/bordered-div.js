@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components/native";
-import { ColorContext } from "../contexts/ColorContext";
+import { ColorContext } from "../contexts/color-context";
 
 const Div = styled.View`
   width: 90%;

@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { StyleSheet } from "react-native";
-import { Settings } from "../screens/Settings";
-import ColorButton from "./ColorButton";
+import { Settings } from "../screens/settings";
+import ColorButton from "./color-button";
 import styled from "styled-components/native";
-import { ColorContext } from "../contexts/ColorContext";
+import { ColorContext } from "../contexts/color-context";
 
 const Div = styled.View`
   width: 100%;

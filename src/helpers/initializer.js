@@ -3,8 +3,8 @@ import {
   PaswordsTableInitialize,
   SettingsTableInitialize,
   SuggestedColors,
-} from "../constants/sqlScripts";
-import { execute } from "./sqliteconnector";
+} from "../constants/sql-scripts";
+import { execute } from "./sqlite-connector";
 
 export function initialize() {
   return new Promise(async (resolve, reject) => {

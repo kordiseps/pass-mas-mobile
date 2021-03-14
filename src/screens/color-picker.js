@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View,  Text, TouchableOpacity, FlatList } from "react-native";
 import styled from "styled-components/native";
-import TextBox from "../components/TextBox";
-import colorsData from "../constants/colorList.json";
-import { ColorContext } from "../contexts/ColorContext";
-import MyModal from "../components/MyModal";
+import TextBox from "../components/text-box";
+import colorsData from "../constants/color-list.json";
+import { ColorContext } from "../contexts/color-context";
+import MyModal from "../components/my-modal";
 
 const Div = styled.View`
   flex: 1;

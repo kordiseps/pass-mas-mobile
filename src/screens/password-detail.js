@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
-import TextBox from "../components/TextBox";
-import Label from "../components/Label";
-import ColorPicker from "./ColorPicker";
-import ColorButton from "../components/ColorButton";
-import { ColorContext } from "../contexts/ColorContext";
-import Loading from "../components/Loading";
-import Choise from "../components/Choise";
-import MyModal from "../components/MyModal";
-import Confirm from "../components/Confirm";
+import TextBox from "../components/text-box";
+import Label from "../components/label";
+import ColorPicker from "./color-picker";
+import ColorButton from "../components/color-button";
+import { ColorContext } from "../contexts/color-context";
+import Loading from "../components/loading";
+import Choise from "../components/choise";
+import MyModal from "../components/my-modal";
+import Confirm from "../components/confirm";
 
 export default PasswordDetail = (props) => {
   const [deleteConfirmRequested, setDeleteConfirmRequested] = useState(false);
