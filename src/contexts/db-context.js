@@ -1,4 +1,4 @@
-import { execute } from "../helpers/sqliteconnector";
+import { execute } from "../helpers/sqlite-connector";
 import {
   GetPasswords,
   InsertApiIdPassword,
@@ -19,7 +19,7 @@ import {
   DropColors,
   DropPaswords,
   DropSettings,
-} from "../constants/sqlScripts";
+} from "../constants/sql-scripts";
 
 export function GetColorsForContext() {
   return new Promise(async (resolve, reject) => {
@@ -157,7 +157,7 @@ export function getPasswords() {
 
 async function getSetting(sqlQuery) {
   try {
-    console.log("sqlQuery",sqlQuery)
+    //console.log("sqlQuery",sqlQuery)
     //var res = await execute(sqlQuery).then((val) => val.rows._array[0].value);
     var val = await execute(sqlQuery); //.then((val) => val.rows._array[0].value);
     //console.log("val",val)

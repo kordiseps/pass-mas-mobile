@@ -1,9 +1,9 @@
 import React, { useEffect } from "react"; 
-import ColorButton from "../components/ColorButton";
-import Label from "../components/Label";
-import MyModal from "../components/MyModal";
-import { DropAccount } from "../contexts/dbContext";
-import { DropAccountFromServer } from "../helpers/apiconnector";
+import ColorButton from "../components/color-button";
+import Label from "../components/label";
+import MyModal from "../components/my-modal";
+import { DropAccount } from "../contexts/db-context";
+import { DropAccountFromServer } from "../helpers/api-connector";
 
 export const SettingsRemoveUserData = (props) => {
   useEffect(() => {}, []);

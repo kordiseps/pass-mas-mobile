@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Modal } from "react-native";
 import styled from "styled-components/native";
-import { ColorContext } from "../contexts/ColorContext";
+import { ColorContext } from "../contexts/color-context";
 
 const Div = styled.View`
   flex: 1;

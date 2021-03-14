@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
-import { ColorContext } from "../contexts/ColorContext";
-import BorderedDiv from "./BorderedDiv";
+import { ColorContext } from "../contexts/color-context";
+import BorderedDiv from "./bordered-div";
 
 const Div = styled.View`
   width:100%;

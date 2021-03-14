@@ -1,7 +1,7 @@
 import React from "react";
-import Label from "./Label";
-import MyModal from "./MyModal";
-import Choise from "./Choise";
+import Label from "./label";
+import MyModal from "./my-modal";
+import Choise from "./choise";
 
 export default Confirm = (props) => {
   return (

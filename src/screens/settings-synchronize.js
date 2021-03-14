@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
-import ColorButton from "../components/ColorButton";
-import Label from "../components/Label";
-import Loading from "../components/Loading";
-import MyModal from "../components/MyModal";
+import ColorButton from "../components/color-button";
+import Label from "../components/label";
+import Loading from "../components/loading";
+import MyModal from "../components/my-modal";
 import { synchronize } from "../helpers/synchronizer";
 
 export const SettingsSynchronize = (props) => {

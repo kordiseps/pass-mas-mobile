@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View, FlatList } from "react-native";
 import styled from "styled-components/native";
-import { deletePassword, getPasswords, savePassword, updatePassword } from "../contexts/dbContext";
+import { deletePassword, getPasswords, savePassword, updatePassword } from "../contexts/db-context";
 import { synchronize } from "../helpers/synchronizer";
-import ColorButton from "../components/ColorButton";
-import ListItem from "../components/ListItem";
-import AddPassword from "./AddPassword";
-import Loading from "../components/Loading";
+import ColorButton from "../components/color-button";
+import ListItem from "../components/list-item";
+import AddPassword from "./add-password";
+import Loading from "../components/loading";
 
 const Div = styled.View`
   flex: 1;

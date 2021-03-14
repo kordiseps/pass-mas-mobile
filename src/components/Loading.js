@@ -12,7 +12,7 @@ import {
   // WaveIndicator,
 } from "react-native-indicators";
 
-import { ColorContext } from "../contexts/ColorContext";
+import { ColorContext } from "../contexts/color-context";
 
 export default Loading = (props) => {
   let size = 50;
