@@ -1,4 +1,5 @@
-import { postData, login } from "./apiconnector";
+import { postData, login, makeRequestWithKey } from "./apiconnector";
+import { RemoveAccountUrl } from "../constants/apiUrls";
 import {
   getPasswords,
   getUserMail,
@@ -10,13 +11,15 @@ export async function synchronize() {
   console.log("synchronize bg");
   const UserMail = await getUserMail();
   const UserPinCode = await getUserPinCode();
-
-  const key = await login(UserMail, UserPinCode)
-    .then((msg) => msg.token)
-    .catch((err) => {
-      console.log("login", err);
-      return err;
-    });
+  let key = "";
+  try {
+    const msg = await login(UserMail, UserPinCode);
+    console.log(msg);
+    key = await msg.token;
+  } catch (error) {
+    console.log("login", err);
+    return err;
+  }
 
   const passwords = await getPasswords();
 
@@ -42,4 +45,22 @@ export async function synchronize() {
       console.log("güncel ", element);
     }
   }
+}
+
+export async function removeDataAndAccountFromDevice() {
+  
+}
+export async function removeDataAndAccountFromServer() {
+  const UserMail = await getUserMail();
+  const UserPinCode = await getUserPinCode();
+  let key = "";
+  try {
+    const msg = await login(UserMail, UserPinCode);
+    key = await msg.token;
+  } catch (error) {
+    console.log("login", err);
+    return err;
+  }
+  const result = await makeRequestWithKey(RemoveAccountUrl, "POST", {}, key);
+  return result;
 }

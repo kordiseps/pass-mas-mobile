@@ -1,9 +1,15 @@
-import { DataUrl, LoginUrl, RegisterUrl } from "../constants/apiUrls";
+import {
+  DataUrl,
+  LoginUrl,
+  RegisterUrl,
+  RemoveAccountUrl,
+} from "../constants/apiUrls";
+import { getUserMail, getUserPinCode } from "../contexts/dbContext";
 
 export async function makeRequest(uri, method, data) {
   //console.log("makeRequest bg", uri, method, JSON.stringify(data));
   return new Promise(async (resolve, _) => {
-    try { 
+    try {
       var response = await fetch(uri, {
         method,
         headers: {
@@ -12,7 +18,7 @@ export async function makeRequest(uri, method, data) {
           "User-Agent": "Mobile App",
         },
         body: JSON.stringify(data),
-      }); 
+      });
       var responseJson = await response.json();
       console.log(responseJson);
       resolve(responseJson);
@@ -108,20 +114,30 @@ export async function updateData(data, key) {
 
 export async function submitRegisterForm(userMail, pinCode) {
   try {
-    // console.log("RegisterUrl", RegisterUrl);
-    // console.log("RegisterUrl","https://pass-mas-api.herokuapp.com/users/register");
-    return await makeRequest(
-      RegisterUrl,
-      "POST",
-      {
-        userMail: userMail,
-        pinCode: pinCode,
-      }
-    );
+    return await makeRequest(RegisterUrl, "POST", {
+      userMail: userMail,
+      pinCode: pinCode,
+    });
   } catch (err) {
     console.log(err);
     return {
       errors: err,
     };
+  }
+}
+
+export async function DropAccountFromServer() {
+  
+  const UserMail = await getUserMail();
+  const UserPinCode = await getUserPinCode();
+  const msg = await login(UserMail, UserPinCode);
+  let key = await msg.token;
+
+  try {
+    var response = await makeRequestWithKey(RemoveAccountUrl, "POST", {}, key);
+    return response.isSuccess;
+  } catch (err) {
+    console.log(err);
+    return false;
   }
 }

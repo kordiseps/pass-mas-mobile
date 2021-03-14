@@ -30,6 +30,11 @@ const Header = (props) => {
       setSettings(true);
     }
   };
+  
+  function handleDropAccount() {
+    setSettings(false);
+    props.onDropAccount()
+  }
   return (
     <Div style={{ backgroundColor: colors.backColor }}>
       <Text style={{ color: colors.mainColor }}>PASS-MAS</Text>
@@ -45,6 +50,7 @@ const Header = (props) => {
         onClose={() => {
           setSettings((o) => !o);
         }}
+        onDropAccount={handleDropAccount}
       />
     </Div>
   );

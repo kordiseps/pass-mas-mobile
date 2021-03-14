@@ -28,6 +28,10 @@ export const Settings = (props) => {
   const handleCloseSettings = () => {
     props.onClose();
   };
+  function handleDropAccount() {
+    setRemoveUserDataSettings(false);
+    props.onDropAccount()
+  }
 
   return (
     <MyModal visible={props.visible}>
@@ -62,6 +66,7 @@ export const Settings = (props) => {
         onClose={() => {
           setRemoveUserDataSettings((o) => !o);
         }}
+        onDropAccount={handleDropAccount}
       />
       <SettingsColorTheme
         visible={colorThemeSettings}

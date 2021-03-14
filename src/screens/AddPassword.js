@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { View, Modal } from "react-native";
+import React, { useContext, useEffect, useState } from "react"; 
 import styled from "styled-components/native";
 import TextBox from "../components/TextBox";
 import Label from "../components/Label";
@@ -8,11 +7,7 @@ import ColorButton from "../components/ColorButton";
 import { ColorContext } from "../contexts/ColorContext";
 import Loading from "../components/Loading";
 import Choise from "../components/Choise";
-import MyModal from "../components/MyModal";
-
-const Div = styled.View`
-  flex: 1;
-`;
+import MyModal from "../components/MyModal"; 
 
 export default AddPassword = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
