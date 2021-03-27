@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import TextBox from "../components/text-box";
 import Label from "../components/label";
 import ColorPicker from "./color-picker";
 import ColorButton from "../components/color-button";
-import { ColorContext } from "../contexts/color-context";
 import Loading from "../components/loading";
 import Choise from "../components/choise";
 import MyModal from "../components/my-modal";
@@ -16,16 +15,7 @@ export default PasswordDetail = (props) => {
   const [username, setUserName] = useState(props.data.username);
   const [password, setPassword] = useState(props.data.password);
   const [colorPickRequested, setColorPickRequested] = useState(false);
-  const { colors } = useContext(ColorContext);
   const [color, setColor] = useState(props.data.color);
-
-  function reset() {
-    setApp("");
-    setUserName("");
-    setPassword("");
-    setColor(colors.mainColor);
-  }
-
   const handleSubmit = () => {
     if (app !== "" && username !== "" && password !== "" && color !== "") {
       setIsSubmitting(true);
@@ -115,40 +105,3 @@ export default PasswordDetail = (props) => {
     </MyModal>
   );
 };
-//   <PasswordInpts
-//     app={app}
-//     setApp={setApp}
-//     username={username}
-//     setUserName={setUserName}
-//     password={password}
-//     setPassword={setPassword}
-//     color={color}
-//     handleColorPickRequested={handleColorPickRequested}
-//     colorPickRequested={colorPickRequested}
-//     handleColorSelect={handleColorSelect}
-//   />
-// const PasswordInpts = (props) => {
-//   return (
-//     <>
-//       <TextBox placeholder="Uygulama" text={props.app} setText={props.setApp} />
-//       <TextBox
-//         placeholder="Kullanıcı Adı"
-//         text={props.username}
-//         setText={props.setUserName}
-//       />
-//       <TextBox
-//         placeholder="Parola"
-//         text={props.password}
-//         setText={props.setPassword}
-//         isSecure
-//       />
-//       <ColorButton color={props.color} onPress={props.handleColorPickRequested}>
-//         Renk Seç
-//       </ColorButton>
-//       <ColorPicker
-//         visible={props.colorPickRequested}
-//         onSelect={props.handleColorSelect}
-//       />
-//     </>
-//   );
-// };

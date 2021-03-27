@@ -49,6 +49,10 @@ export const GetPasswords = `
 SELECT * FROM Paswords WHERE state != 2;
 `;
 
+export const GetPasswordsToSync = `
+SELECT * FROM Paswords
+`;
+
 export const InsertPassword = (app, userName, password, color) => `
 INSERT INTO Paswords ( app, userName, password, color, state ) 
 VALUES ('${app}','${userName}','${password}','${color}', 0);

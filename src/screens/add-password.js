@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"; 
-import styled from "styled-components/native";
+import React, { useContext, useEffect, useState } from "react";
 import TextBox from "../components/text-box";
 import Label from "../components/label";
 import ColorPicker from "./color-picker";
@@ -7,7 +6,7 @@ import ColorButton from "../components/color-button";
 import { ColorContext } from "../contexts/color-context";
 import Loading from "../components/loading";
 import Choise from "../components/choise";
-import MyModal from "../components/my-modal"; 
+import MyModal from "../components/my-modal";
 
 export default AddPassword = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -28,6 +27,19 @@ export default AddPassword = (props) => {
 
   const handleSubmit = () => {
     if (app !== "" && username !== "" && password !== "" && color !== "") {
+      if (app.length < 3) {
+        alert("Uygulama adı en az 3 karakter olmalıdır.");
+        return;
+      }
+      if (username.length < 5) {
+        alert("Kullanıcı adı en az 5 karakter olmalıdır.");
+        return;
+      }
+      if (password.length < 4) {
+        alert("Parola en az 4 karakter olmalıdır.");
+        return;
+      }
+      
       setIsSubmitting(true);
       reset();
       props.onAdd(app, username, password, color);
