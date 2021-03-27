@@ -6,6 +6,7 @@ import Loading from "../components/loading";
 import TextBox from "../components/text-box";
 import { UpdateLoginPinCode } from "../contexts/db-context";
 import MyModal from "../components/my-modal";
+import { UpdateLoginPinCodeFromServer } from "../helpers/api-connector";
 
 export const SettingsPassword = (props) => {
   const [oldPassword, setOldPassword] = useState("");
@@ -38,8 +39,13 @@ export const SettingsPassword = (props) => {
       return;
     }
     setProcessing(true);
-    var res = await UpdateLoginPinCode(oldPassword, newPassword);
-    alert(res);
+    var updateFromServerRes = await UpdateLoginPinCodeFromServer(newPassword);
+    if (updateFromServerRes) {
+      var res = await UpdateLoginPinCode(oldPassword, newPassword);
+      alert(res);
+    } else {
+      alert("Sunucuda pin kodu değiştirilemedi");
+    }
     setProcessing(false);
   };
   const handleCloseSettings = () => {
