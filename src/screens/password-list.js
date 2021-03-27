@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View, FlatList } from "react-native";
 import styled from "styled-components/native";
-import { deletePassword, getPasswords, savePassword, updatePassword } from "../contexts/db-context";
-import { synchronize } from "../helpers/synchronizer";
+import {
+  getPasswords,
+  markPasswordDeleted,
+  savePassword,
+  updatePassword,
+} from "../contexts/db-context";
 import ColorButton from "../components/color-button";
 import ListItem from "../components/list-item";
 import AddPassword from "./add-password";
@@ -40,13 +44,10 @@ export default PasswordList = (props) => {
     setAddRequested(false);
   };
   const handleDelete = (id) => {
-    //console.log("handleDelete", id);
-    deletePassword(id)
-      .then(loadPasswords)
+    markPasswordDeleted(id).then(loadPasswords);
   };
   const handleUpdate = (id, app, username, password, color) => {
-    updatePassword(id, app, username, password, color)
-      .then(loadPasswords) 
+    updatePassword(id, app, username, password, color).then(loadPasswords);
   };
 
   return (
@@ -102,7 +103,6 @@ const renderSeparator = () => {
         height: 1,
         width: "100%",
         backgroundColor: "#CED0CE",
-        //marginLeft: "14%",
       }}
     />
   );

@@ -1,4 +1,5 @@
 import {
+  ChangePasswordUrl,
   DataUrl,
   LoginUrl,
   RegisterUrl,
@@ -20,7 +21,6 @@ export async function makeRequest(uri, method, data) {
         body: JSON.stringify(data),
       });
       var responseJson = await response.json();
-      console.log(responseJson);
       resolve(responseJson);
     } catch (error) {
       console.log("makeRequest error :", error);
@@ -69,8 +69,7 @@ export async function login(userMail, pinCode) {
   }
 }
 
-export async function postData(data, key) {
-  console.log("postData bg");
+export async function postData(data, key) { 
   try {
     return await makeRequestWithKey(
       DataUrl,
@@ -112,6 +111,22 @@ export async function updateData(data, key) {
   }
 }
 
+export async function deleteData(data, key) {
+  try {
+    return await makeRequestWithKey(
+      `${DataUrl}/${data.apiId}`,
+      "DELETE",
+      {},
+      key
+    );
+  } catch (err) {
+    console.log(err);
+    return {
+      errors: err,
+    };
+  }
+}
+
 export async function submitRegisterForm(userMail, pinCode) {
   try {
     return await makeRequest(RegisterUrl, "POST", {
@@ -127,12 +142,7 @@ export async function submitRegisterForm(userMail, pinCode) {
 }
 
 export async function DropAccountFromServer() {
-  
-  const UserMail = await getUserMail();
-  const UserPinCode = await getUserPinCode();
-  const msg = await login(UserMail, UserPinCode);
-  let key = await msg.token;
-
+  let key = await getToken();
   try {
     var response = await makeRequestWithKey(RemoveAccountUrl, "POST", {}, key);
     return response.isSuccess;
@@ -140,4 +150,28 @@ export async function DropAccountFromServer() {
     console.log(err);
     return false;
   }
+}
+
+export async function UpdateLoginPinCodeFromServer(newPinCode) {
+  let key = await getToken();
+  try {
+    var response = await makeRequestWithKey(
+      ChangePasswordUrl,
+      "POST",
+      { pinCode: newPinCode },
+      key
+    );
+    console.log(response);
+    return response.isSuccess;
+  } catch (err) {
+    console.log("UpdateLoginPinCodeFromServer err", err);
+    return false;
+  }
+}
+export async function getToken() {
+  const UserMail = await getUserMail();
+  const UserPinCode = await getUserPinCode();
+  const msg = await login(UserMail, UserPinCode);
+  const key = await msg.token;
+  return key;
 }

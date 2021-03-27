@@ -15,10 +15,10 @@ export default function Main() {
   const [first, setFirst] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
   const [colors, setColors] = useState({
-    backColor: "#ededed",
-    mainColor: "#0C1618",
-    passiveColor: "#335b63",
-    cancelColor: "#333025",
+    backColor: "#ffffff",
+    mainColor: "#c65155",
+    passiveColor: "#c45983",
+    cancelColor: "#7659c3",
   });
   useEffect(() => {
     async function prepare() {
