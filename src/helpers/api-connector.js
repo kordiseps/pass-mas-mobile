@@ -54,6 +54,30 @@ export async function makeRequestWithKey(uri, method, data, key) {
   });
 }
 
+export async function makeRequestWithKeyWithoutBody(uri, method, key) {
+  return fetch(uri, {
+    method,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "Mobile App",
+      "auth-key": key,
+    },
+  }).then((response) => {
+    if (!response.ok) {
+      return response
+        .json()
+        .catch(() => {
+          throw new Error(response.text());
+        })
+        .then((resposeData) => {
+          return resposeData;
+        });
+    }
+    return response.json();
+  });
+}
+
 export async function login(userMail, pinCode) {
   console.log("login bg");
   try {
@@ -174,4 +198,11 @@ export async function getToken() {
   const msg = await login(UserMail, UserPinCode);
   const key = await msg.token;
   return key;
+} 
+export async function downloadData(key) {
+  return await makeRequestWithKeyWithoutBody(
+    `${DataUrl}`,
+    "GET",
+    key
+  );
 }

@@ -3,6 +3,7 @@ import {
   GetPasswords,
   InsertApiIdPassword,
   InsertPassword,
+  InsertPasswordForRestore,
   GetColors,
   GetUserPinCode,
   UpdateUserPinCode,
@@ -16,6 +17,7 @@ import {
   DropSettings,
   MarkPasswordSynchronized,
   GetPasswordsToSync,
+  InsertUser
 } from "../constants/sql-scripts";
 
 export function GetColorsForContext() {
@@ -52,6 +54,18 @@ export function SetColors(val) {
 
 export function savePassword(app, username, password, color) {
   let sqlString = InsertPassword(app, username, password, color);
+  try {
+    return execute(sqlString);
+  } catch (err) {
+    console.log("savePassword err", err);
+    return {
+      errors: err,
+    };
+  }
+}
+
+export function savePasswordForRestore(app, username, password, color,apiId) {
+  let sqlString = InsertPasswordForRestore(app, username, password, color,apiId);
   try {
     return execute(sqlString);
   } catch (err) {
@@ -189,4 +203,20 @@ export async function DropAccount() {
     console.log("DropAccount", err);
     return false;
   }
+}
+
+
+
+export function saveUser(userMail, pinCode) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let sqlString = InsertUser(userMail, pinCode);
+      await execute(sqlString);
+      console.log("saveUser OK");
+      resolve();
+    } catch (error) {
+      console.log("saveUser error", error);
+      reject(error);
+    }
+  });
 }

@@ -1,12 +1,12 @@
-import React, { useState } from "react"; 
+import React, { useState } from "react";
 import TextBox from "../components/text-box";
 import styled from "styled-components/native";
 import { submitRegisterForm } from "../helpers/api-connector";
-import { initialize } from "../helpers/initializer";
-import { InsertUser } from "../constants/sql-scripts";
-import { execute } from "../helpers/sqlite-connector";
+import { initialize } from "../helpers/initializer"; 
 import Loading from "../components/loading";
 import { AsyncAlert } from "../components/async-alert";
+import { Restore } from "./restore";
+import { saveUser } from "../contexts/db-context";
 
 const Div = styled.View`
   flex: 1;
@@ -17,6 +17,17 @@ export default Register = (props) => {
   const [pinCode, setPinCode] = useState("123123");
   const [confirmPinCode, setConfirmPinCode] = useState("123123");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [restoreRequested, setRestoreRequested] = useState(false);
+
+  function handleRestore() {
+    setRestoreRequested(true);
+  }
+  function onRestore() {
+    props.handleRestoreAccount()
+  }
+  function onCancelRestore() {
+    setRestoreRequested(false);
+  }
 
   async function handleSubmit() {
     setIsSubmitting(true);
@@ -67,25 +78,8 @@ export default Register = (props) => {
       ) : (
         <ColorButton onPress={handleSubmit}>Kayıt Ol</ColorButton>
       )}
-      <ColorButton onPress={handleSubmit}>Zaten Kayıtlı mısınız?</ColorButton>
+      <ColorButton onPress={handleRestore}>Zaten Kayıtlı mısınız?</ColorButton>
+      <Restore visible={restoreRequested} onCancelRestore={onCancelRestore} onRestore= {onRestore}/>
     </Div>
   );
 };
-
-
-
-export function saveUser(userMail, pinCode) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      // await execute(DeleteUsers);
-      // console.log("DeleteUsers succ");
-      let sqlString = InsertUser(userMail, pinCode);
-      await execute(sqlString);
-      console.log("saveUser OK");
-      resolve();
-    } catch (error) {
-      console.log("saveUser error", error);
-      reject(error);
-    }
-  });
-}
