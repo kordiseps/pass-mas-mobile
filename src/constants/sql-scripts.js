@@ -58,6 +58,11 @@ INSERT INTO Paswords ( app, userName, password, color, state )
 VALUES ('${app}','${userName}','${password}','${color}', 0);
 `;
 
+export const InsertPasswordForRestore = (app, userName, password, color,apiId) => `
+INSERT INTO Paswords ( app, userName, password, color, apiId, state ) 
+VALUES ('${app}','${userName}','${password}','${color}','${apiId}', 3);
+`;
+
 export const UpdatePassword = (id, app, userName, password, color) => `
 UPDATE Paswords 
 SET app = '${app}', userName = '${userName}', password = '${password}', color = '${color}', state = 1 
@@ -109,21 +114,12 @@ UPDATE Settings SET value = '${pinCode}' WHERE setting = 'pinCode';
 export const SuggestedColors = `
 INSERT INTO Colors ( location, locationDescription, value ) 
 VALUES 
-    ('backColor', 'Uygulama Arkaplanı Rengi', '#ededed'),
-    ('mainColor', 'Ana Renk', '#0C1618'),
-    ('passiveColor', 'Pasif Renk', '#335b63'),
-    ('cancelColor', 'İptal Rengi', '#333025');
+    ('backColor', 'Uygulama Arkaplanı Rengi', '#ffffff'),
+    ('mainColor', 'Ana Renk', '#c65155'),
+    ('passiveColor', 'Pasif Renk', '#c45983'),
+    ('cancelColor', 'İptal Rengi', '#7659c3');
 `;
-
-// export const SuggestedDarkModeColors = `
-// INSERT INTO Colors ( location, locationDescription, value )
-// VALUES
-//     ('backColor', 'Uygulama Arkaplanı Rengi', '#222222'),
-//     ('mainColor', 'Ana Renk', '#c9999f'),
-//     ('passiveColor', 'Pasif Renk', '#7d6366'),
-//     ('cancelColor', 'İptal Rengi', '#4c2b36');
-// `;
-
+ 
 export const DeleteColors = `
 DELETE FROM Colors;
 `;

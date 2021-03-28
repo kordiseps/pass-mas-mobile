@@ -49,7 +49,7 @@ export default function Main() {
         {loading ? (
           <Loading size={150} />
         ) : first ? (
-          <Register registered={() => setFirst(false)} />
+          <Register registered={() => setFirst(false)} handleRestoreAccount = {handleDropAccount} />
         ) : !loggedIn ? (
           <Login
             loggedIn={() => {
