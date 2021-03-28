@@ -18,9 +18,7 @@ Also a web application planned.
 
 ## To Do 
 
- - Change pin code when only web api can be accessible
- - Complete to synchronize data
- - Create a mechanism to restore account from new device
+ - Learn React Native test 
  - Write test
 
 ## Author(s) - Contributor(s)
